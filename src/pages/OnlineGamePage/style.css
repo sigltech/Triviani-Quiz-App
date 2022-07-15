@@ -1,0 +1,28 @@
+.Online-game-start-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 400px;
+    width: 50vw;
+    border: 4px solid #B4EDD2;
+    border-radius: 20px;
+    margin: 0 auto;
+    margin-top: 150px;
+}
+
+.flex-col-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.questions-selection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
