@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Routes, Route} from 'react-router-dom';
-import { OnlineGamePage, GameFinishPage } from './pages';
+import { OnlineGamePage, GameFinishPage, GamePage } from './pages';
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
         <Route path="/">
           <Route path="/" element={<OnlineGamePage />} />
           <Route path="/finish" element={<GameFinishPage />} />
+          <Route path="/game" element={<GamePage />} />
         </Route>
       </Routes>
     </div>
