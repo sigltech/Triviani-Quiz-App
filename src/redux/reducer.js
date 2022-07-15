@@ -5,7 +5,7 @@ import {
   CHANGE_SCORE,
   CHANGE_TYPE,
   CHANGE_USERNAME,
-} from "./actionType";
+} from "./actionTypes";
 
 const initState = {
   username: "",
