@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const LocalGame = () => {
+const LocalGame = () => {
   return (
     <>
       <h1>Local Game</h1>
@@ -41,3 +41,5 @@ export const LocalGame = () => {
     </>
   );
 };
+
+export default LocalGame;
