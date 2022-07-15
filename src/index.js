@@ -5,7 +5,6 @@ import App from './App'
 import {BrowserRouter as Router} from 'react-router-dom';
 import store from './store.js'
 
-
 const root = reactDom.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
