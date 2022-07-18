@@ -145,6 +145,7 @@ function GamePage() {
           </div>
         </div>
       </div>
+      </div>
   );
 }
 
