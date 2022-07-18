@@ -4,8 +4,5 @@ export const CHANGE_TYPE = "CHANGE_TYPE";
 export const CHANGE_AMOUNT = "CHANGE_AMOUNT";
 export const CHANGE_SCORE = "CHANGE_SCORE";
 export const CHANGE_USERNAME = "CHANGE_USERNAME";
-<<<<<<< HEAD
-export const FETCH_DATA = "FETCH_DATA";
-=======
+// export const FETCH_DATA = "FETCH_DATA";
 export const CHANGE_PLAYER = "CHANGE_PLAYER";
->>>>>>> 5f297f1e8647644bd86ec6d0d3cbf7c7a04fb369

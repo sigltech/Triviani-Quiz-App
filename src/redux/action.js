@@ -1,6 +1,6 @@
 /* istanbul ignore file */
-import axios from "axios";
-import React, { useState } from 'react';
+// import axios from "axios";
+// import React, { useState } from 'react';
 
 import {
   CHANGE_CATEGORY,
@@ -9,10 +9,7 @@ import {
   CHANGE_TYPE,
   CHANGE_SCORE,
   CHANGE_USERNAME,
-<<<<<<< HEAD
-=======
   CHANGE_PLAYER,
->>>>>>> 5f297f1e8647644bd86ec6d0d3cbf7c7a04fb369
 } from "./actionTypes";
 
 export const handleCategoryChange = (payload) => ({
@@ -44,28 +41,25 @@ export const handleUsernameChange = (payload) => ({
   type: CHANGE_USERNAME,
   payload,
 });
-<<<<<<< HEAD
 
-export const fetchData = () => {
-  const [answers, setAnswers] = useState(''); 
-
-  return (dispatch) => {
-    dispatch(fetchDataRequest)
-    try {
-    const result = await axios.get('https://opentdb.com/api.php?amount=10&category=20&difficulty=easy&type=multiple')
-    setAnswers(result.data)
-    console.log(result.data);
-    dispatch(fetchDataSuccess(answers))
-    } catch (err) {
-        console.log(err)
-        dispatch(fetchDataFailure(err))
-    }
-  };
-};
-
-=======
 export const handlePlayerChange = (payload) => ({
   type: CHANGE_PLAYER,
   payload,
 });
->>>>>>> 5f297f1e8647644bd86ec6d0d3cbf7c7a04fb369
+
+// export const fetchData = () => {
+//     const [answers, setAnswers] = useState('');
+
+//     return (dispatch) => {
+//       dispatch(fetchDataRequest)
+//       try {
+//       const result = await axios.get('https://opentdb.com/api.php?amount=10&category=20&difficulty=easy&type=multiple')
+//       setAnswers(result.data)
+//       console.log(result.data);
+//       dispatch(fetchDataSuccess(answers))
+//       } catch (err) {
+//           console.log(err)
+//           dispatch(fetchDataFailure(err))
+//       }
+//     };
+//   };

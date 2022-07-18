@@ -1,15 +1,15 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { SelectInputs } from '../../components';
-import useAxios from '../../hooks/useAxios';
-import './style.css'
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { SelectInputs } from "../../components";
+import useAxios from "../../hooks/useAxios";
+import "./style.css";
 
 const LocalGame = () => {
   const navigate = useNavigate();
 
-  const { response, loading, error } = useAxios({ url: 'api_category.php' });
+  const { response, Loading, error } = useAxios({ url: "api_category.php" });
 
-  if (loading) {
+  if (Loading) {
     return <h1>Put loading component here</h1>;
   }
   if (error) {
@@ -17,14 +17,14 @@ const LocalGame = () => {
   }
 
   const difficultyOpt = [
-    { id: 'easy', name: 'Easy' },
-    { id: 'medium', name: 'Medium' },
-    { id: 'hard', name: 'Hard' },
+    { id: "easy", name: "Easy" },
+    { id: "medium", name: "Medium" },
+    { id: "hard", name: "Hard" },
   ];
 
   const typeOpt = [
-    { id: 'multiple', name: 'Multiple Choice' },
-    { id: 'boolean', name: 'True/False' },
+    { id: "multiple", name: "Multiple Choice" },
+    { id: "boolean", name: "True/False" },
   ];
 
   const numberOpt = [
@@ -45,26 +45,26 @@ const LocalGame = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/game');
+    navigate("/game");
   };
 
   return (
     <div className="">
-
-      <div className='Localgame-container'>
-      <div className='localgame-inputs-container'>
-
-      <h1>Local Game</h1>
-      <form onSubmit={handleSubmit}>
-        <SelectInputs label="Category" apiData={response.trivia_categories} />
-        <SelectInputs label="Difficulty" apiData={difficultyOpt} />
-        <SelectInputs label="Game Type" apiData={typeOpt} />
-        <SelectInputs label="Number Of Questions" apiData={numberOpt} />
-        <SelectInputs label="Number Of Players" apiData={PlayerOpt} />
-        <input id='startgame-btn' type="submit" value="Start" />
-      </form>
-
-      </div>
+      <div className="Localgame-container">
+        <div className="localgame-inputs-container">
+          <h1>Local Game</h1>
+          <form onSubmit={handleSubmit}>
+            <SelectInputs
+              label="Category"
+              apiData={response.trivia_categories}
+            />
+            <SelectInputs label="Difficulty" apiData={difficultyOpt} />
+            <SelectInputs label="Game Type" apiData={typeOpt} />
+            <SelectInputs label="Number Of Questions" apiData={numberOpt} />
+            <SelectInputs label="Number Of Players" apiData={PlayerOpt} />
+            <input id="startgame-btn" type="submit" value="Start" />
+          </form>
+        </div>
       </div>
     </div>
   );

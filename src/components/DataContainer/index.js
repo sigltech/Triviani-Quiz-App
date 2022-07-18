@@ -1,13 +1,13 @@
-import React, {useEffect } from 'react';
-import { connect } from 'react-redux';
-import {fetchData}
+// import React, {useEffect } from 'react';
+// import { connect } from 'react-redux';
+// import {fetchData}
 
-function dataContainer() {
+// function dataContainer() {
 
-}
+// }
 
-const mapStateToProps = state => {
-    return {
-        data: state.data
-    }
-}
+// const mapStateToProps = state => {
+//     return {
+//         data: state.data
+//     }
+// }
