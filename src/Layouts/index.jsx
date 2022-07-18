@@ -13,12 +13,9 @@ export default function Layout() {
         
     }
     
-    if (!isDarkMode) {
+    if (isDarkMode) {
         const background = document.querySelector(".area");
-        background.classList.add("darkmode-active");
-    } else {
-        const background = document.querySelector(".area");
-        background.classList.remove("darkmode-active");
+        background.classList.toggle("darkmode-active");
     }
 
     return (
