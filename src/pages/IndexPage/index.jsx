@@ -22,6 +22,7 @@ const IndexPage = () => {
         <button>Online Game</button>
 
       </div>
+    </div>
 
 
     {/* <form onSubmit={handleSubmit}>
