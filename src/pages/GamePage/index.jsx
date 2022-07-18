@@ -3,6 +3,7 @@ import useAxios from '../../hooks/useAxios';
 import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
 import Countdown from "react-countdown";
+import { LoadingPage } from '../../components/index.jsx';
 
 function GamePage() {
   const {
@@ -28,7 +29,7 @@ function GamePage() {
   const { response, error, loading } = useAxios({ url: apiUrl });
 
   if (loading) {
-    return <h1>put spinner here</h1>;
+    return <LoadingPage />;
   }
   console.log(response);
   console.log(

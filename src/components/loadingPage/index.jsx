@@ -2,17 +2,17 @@ import React from "react";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { ThreeCircles } from  'react-loader-spinner'
 
-function loadingPage() {
+function LoadingPage() {
     return(
         <>
             <ThreeCircles
-  color="blue"
-  height={110}
-  width={110}
-  ariaLabel="three-circles-rotating"
-/>
+                color="blue"
+                height={110}
+                width={110}
+                ariaLabel="three-circles-rotating"
+            />
         </>
     )
 }
 
-export default loadingPage
+export default LoadingPage
