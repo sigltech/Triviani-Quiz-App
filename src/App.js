@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import {Routes, Route} from 'react-router-dom';
-import { OnlineGamePage, GameFinishPage, GamePage, IndexPage } from './pages';
-import Layout from './Layouts';
+import { OnlineGamePage, GameFinishPage, GamePage, LeaderboardPage } from './pages';
+
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
           <Route path="/online" element={<OnlineGamePage />} />
           <Route path="/finish" element={<GameFinishPage />} />
           <Route path="/game" element={<GamePage />} />
+          <Route path="/leaderboard" element={<LeaderboardPage />} />
         </Route>
       </Routes>
     </div>
