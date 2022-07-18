@@ -2,8 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SelectInputs } from '../../components';
 import useAxios from '../../hooks/useAxios';
-import LoadingPage from '../../components';
 import './style.css';
+import { LoadingPage } from '../../components/index.jsx';
 
 const LocalGame = () => {
   const navigate = useNavigate();
