@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
 import Countdown from 'react-countdown';
 import { LoadingPage } from '../../components/index.jsx';
+import { handleScoreChange } from '../../redux/action';
 
 function GamePage() {
     const [questionIndex, setQuestionIndex] = useState(0);
@@ -15,7 +16,10 @@ function GamePage() {
     question_type,
     questionsAmount,
     players,
+    intScore
   } = useSelector((state) => state);
+
+  const dispatch = useDispatch()
 
   let apiUrl = `api.php?amount=${questionsAmount}`;
 
@@ -78,8 +82,11 @@ function GamePage() {
         console.log(typeof e.target.textContent)
         if(e.target.textContent === response.results[questionIndex].correct_answer){
             console.log(`Correct answer is ${response.results[questionIndex].correct_answer}`);
+            dispatch(handleScoreChange(intScore + 1))
+            console.log(intScore)
             setQuestionIndex(questionIndex + 1);
             setTimer(10000);
+           
 
         } else {
             console.log(`That's is the wrong answer`);
@@ -125,6 +132,8 @@ function GamePage() {
                     </div>
 
           <div>
+
+
             <button
               style={{ color: '#000' }}
               onClick={() => {
@@ -136,7 +145,6 @@ function GamePage() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 
