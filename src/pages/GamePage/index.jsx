@@ -21,6 +21,13 @@ function GamePage() {
 
   const dispatch = useDispatch()
 
+  function scoreChange() {
+    switch(intScore) {
+      case 'Score Change':
+      dispatch(handleScoreChange(intScore + 1))
+    }
+  }
+
   let apiUrl = `api.php?amount=${questionsAmount}`;
 
   if (question_category) {
@@ -82,9 +89,8 @@ function GamePage() {
         console.log(typeof e.target.textContent)
         if(e.target.textContent === response.results[questionIndex].correct_answer){
             console.log(`Correct answer is ${response.results[questionIndex].correct_answer}`);
-            dispatch(handleScoreChange(intScore + 1))
-            console.log(intScore)
             setQuestionIndex(questionIndex + 1);
+            scoreChange();
             setTimer(10000);
            
 
@@ -143,6 +149,7 @@ function GamePage() {
               Test socket connection
             </button>
           </div>
+        </div>
         </div>
       </div>
   );

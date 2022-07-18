@@ -43,7 +43,7 @@ const Reducer = (state = initState, action) => {
     case CHANGE_SCORE:
       return {
         ...state,
-        score: action.payload,
+        intScore: action.payload,
       };
     case CHANGE_USERNAME:
       return {
