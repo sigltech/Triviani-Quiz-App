@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import useAxios from '../../hooks/useAxios';
 import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
+import{ useNavigate } from 'react-router';
 import Countdown from 'react-countdown';
 import { LoadingPage } from '../../components/index.jsx';
 import { handleScoreChange } from '../../redux/action';
 
 function GamePage() {
   const [questionIndex, setQuestionIndex] = useState(0);
+  const navigate = useNavigate();
   const [timer, setTimer] = useState(10000);
 
   const {
@@ -20,6 +22,7 @@ function GamePage() {
   } = useSelector((state) => state);
 
   const dispatch = useDispatch();
+
 
   let apiUrl = `api.php?amount=${questionsAmount}`;
 
@@ -75,6 +78,7 @@ function GamePage() {
     }
   };
 
+
   const handleAnswerSelect = (e) => {
     // console.log(e.target.textContent);
     // console.log(response.results[0].correct_answer);
@@ -90,8 +94,13 @@ function GamePage() {
       console.log(intScore);
       setQuestionIndex(questionIndex + 1);
       setTimer(10000);
-    } else {
+    } 
+    else if (response.results.length >= response.results.length ){
+        navigate('/finish')
+    }
+    else {
       console.log(`That's is the wrong answer`);
+
     }
   };
 
@@ -157,7 +166,7 @@ function GamePage() {
             </button>
           </div>
         </div>
-      </div>
+        </div>
       </div>
 
   );
