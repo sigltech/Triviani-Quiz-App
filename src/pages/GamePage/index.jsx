@@ -81,8 +81,7 @@ function GamePage() {
           </div>
 
           <button /*onClick={getApi}*/> press for questions </button>
-          <div className="answers">
-            <h3>Question: </h3>
+
             <div className="divide">
               <div>
                 <div className="answerCard">
@@ -119,7 +118,6 @@ function GamePage() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 
