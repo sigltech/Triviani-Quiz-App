@@ -73,11 +73,10 @@ function GamePage() {
                     </div>
 
                     <div>
-                        
                         <h1>Question</h1>
                     </div>
 
-                    <button onClick={getApi}> press for questions </button>
+                    <button /*onClick={getApi}*/> press for questions </button>
                     <div className="answers">
                         <div className="answerCard"> <h4> answer1</h4> </div>
                         <div className="answerCard"> <h4> answer2</h4> </div>
