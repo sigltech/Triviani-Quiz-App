@@ -5,6 +5,7 @@ import useAxios from '../../hooks/useAxios';
 
 const LocalGame = () => {
   const navigate = useNavigate();
+
   const { response, loading, error } = useAxios({ url: 'api_category.php' });
 
   if (loading) {
