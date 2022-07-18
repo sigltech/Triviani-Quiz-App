@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LeaderBoard = () => {
+const LeaderBoardPage = () => {
   return (
     <>
       <h1>Leader Board</h1>
@@ -10,4 +10,4 @@ const LeaderBoard = () => {
   );
 };
 
-export default LeaderBoard;
+export default LeaderBoardPage;
