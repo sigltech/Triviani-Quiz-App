@@ -91,4 +91,8 @@
         flex-direction: column;
         justify-content: flex-start;
     }
+
+    .context {
+        top: 50vh;
+    }
 }

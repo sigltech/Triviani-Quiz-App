@@ -19,6 +19,10 @@ function GamePage() {
                 <div className="answerCard"> <h4> answer1</h4> </div>
             </div>
 
+            <div>
+                <button style={{color: '#000'}} onClick={() => {console.log('clicked')}}>Test socket connection</button>
+            </div>
+
 
         </div>
     )
