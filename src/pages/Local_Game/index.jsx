@@ -10,7 +10,7 @@ const LocalGame = () => {
 
   const { response, Loading, error } = useAxios({ url: "api_category.php" });
 
-  if (loading) {
+  if (Loading) {
     return <LoadingPage />;
   }
   if (error) {
