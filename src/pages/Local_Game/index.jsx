@@ -3,14 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { SelectInputs } from "../../components";
 import useAxios from "../../hooks/useAxios";
 import "./style.css";
+import { LoadingPage } from "../../components/index.jsx";
 
 const LocalGame = () => {
   const navigate = useNavigate();
 
   const { response, Loading, error } = useAxios({ url: "api_category.php" });
 
-  if (Loading) {
-    return <h1>Put loading component here</h1>;
+  if (loading) {
+    return <LoadingPage />;
   }
   if (error) {
     return <h1>Put error component here</h1>;

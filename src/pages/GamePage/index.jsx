@@ -3,6 +3,7 @@ import useAxios from "../../hooks/useAxios";
 import { useSelector, useDispatch } from "react-redux";
 import "./style.css";
 import Countdown from "react-countdown";
+import { LoadingPage } from "../../components/index.jsx";
 
 function GamePage() {
   const {
@@ -25,10 +26,10 @@ function GamePage() {
     apiUrl = apiUrl.concat(`&type=${question_type}`);
   }
 
-  const { response, error, Loading } = useAxios({ url: apiUrl });
+  const { response, error, loading } = useAxios({ url: apiUrl });
 
-  if (Loading) {
-    return <h1>put spinner here</h1>;
+  if (loading) {
+    return <LoadingPage />;
   }
   console.log(response);
   console.log(

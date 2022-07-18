@@ -1,2 +1,2 @@
-export { default as loadingPage } from './loadingPage';
-export { default as SelectInputs } from './SelectInputs';
+export { default as LoadingPage } from "./LoadingPage/index.jsx";
+export { default as SelectInputs } from "./SelectInputs";
