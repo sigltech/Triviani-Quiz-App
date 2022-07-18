@@ -168,6 +168,7 @@ function GamePage() {
         </div>
         </div>
       </div>
+
   );
 }
 
