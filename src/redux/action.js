@@ -9,6 +9,10 @@ import {
   CHANGE_TYPE,
   CHANGE_SCORE,
   CHANGE_USERNAME,
+<<<<<<< HEAD
+=======
+  CHANGE_PLAYER,
+>>>>>>> 5f297f1e8647644bd86ec6d0d3cbf7c7a04fb369
 } from "./actionTypes";
 
 export const handleCategoryChange = (payload) => ({
@@ -40,6 +44,7 @@ export const handleUsernameChange = (payload) => ({
   type: CHANGE_USERNAME,
   payload,
 });
+<<<<<<< HEAD
 
 export const fetchData = () => {
   const [answers, setAnswers] = useState(''); 
@@ -58,3 +63,9 @@ export const fetchData = () => {
   };
 };
 
+=======
+export const handlePlayerChange = (payload) => ({
+  type: CHANGE_PLAYER,
+  payload,
+});
+>>>>>>> 5f297f1e8647644bd86ec6d0d3cbf7c7a04fb369

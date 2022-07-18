@@ -1,11 +1,39 @@
 import React, { useState } from 'react';
 import '../../style/select_inputs.css';
+import { useDispatch } from 'react-redux';
+import {
+  handleAmountChange,
+  handleCategoryChange,
+  handleDifficultyChange,
+  handleTypeChange,
+} from '../../redux/action';
 
 const SelectInputs = ({ label, apiData }) => {
   const [value, setValue] = useState('');
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setValue(e.target.value);
+    switch (label) {
+      case 'Category':
+        dispatch(handleCategoryChange(e.target.value));
+        break;
+
+      case 'Difficulty':
+        dispatch(handleDifficultyChange(e.target.value));
+        break;
+
+      case 'Game Type':
+        dispatch(handleTypeChange(e.target.value));
+        break;
+
+      case 'Number Of Questions':
+        dispatch(handleAmountChange(e.target.value));
+        break;
+
+      default:
+        return;
+    }
   };
 
   return (

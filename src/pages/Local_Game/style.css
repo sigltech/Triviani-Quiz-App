@@ -1,0 +1,58 @@
+#startgame-btn {
+    color: #000;
+    margin: 1rem;
+    padding: 0.4rem 1rem;
+    border-radius: 7px;
+    cursor: pointer;
+    border: 3px solid rgb(255, 255, 255, 0);
+    text-align: center;
+    width: 100%;
+    font-size: 1.5rem;
+    animation: jiggleBtn 0.3s ease-in-out infinite;
+}
+
+#startgame-btn:hover {
+    background-color: rgb(255, 255, 255, 0);
+    color: #fff;
+    border: 3px solid rgb(255, 255, 255);
+    transition: background-color 0.3s ease-in-out;
+
+}
+
+@keyframes jigglebtn {
+    0% {
+        transform: rotateX(0deg);
+    }
+    50% {
+        transform: rotateX(20deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
+    
+}
+
+.Localgame-container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.localgame-inputs-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.5);
+    padding: 2rem;
+}
+
+.localgame-inputs-container form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+

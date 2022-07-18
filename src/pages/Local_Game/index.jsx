@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SelectInputs } from '../../components';
 import useAxios from '../../hooks/useAxios';
+import './style.css'
 
 const LocalGame = () => {
   const navigate = useNavigate();
@@ -35,6 +36,13 @@ const LocalGame = () => {
     { id: 20, name: 30 },
   ];
 
+  const PlayerOpt = [
+    { id: 10, name: 1 },
+    { id: 12, name: 2 },
+    { id: 14, name: 3 },
+    { id: 16, name: 4 },
+  ];
+
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate('/game');
@@ -42,15 +50,22 @@ const LocalGame = () => {
 
   return (
     <div className="">
-      <h1>Local Game</h1>
 
+      <div className='Localgame-container'>
+      <div className='localgame-inputs-container'>
+
+      <h1>Local Game</h1>
       <form onSubmit={handleSubmit}>
         <SelectInputs label="Category" apiData={response.trivia_categories} />
         <SelectInputs label="Difficulty" apiData={difficultyOpt} />
         <SelectInputs label="Game Type" apiData={typeOpt} />
         <SelectInputs label="Number Of Questions" apiData={numberOpt} />
-        <input type="submit" value="Start" />
+        <SelectInputs label="Number Of Players" apiData={PlayerOpt} />
+        <input id='startgame-btn' type="submit" value="Start" />
       </form>
+
+      </div>
+      </div>
     </div>
   );
 };
