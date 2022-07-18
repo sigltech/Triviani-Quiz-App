@@ -2,7 +2,7 @@ import React from "react";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { ThreeCircles } from  'react-loader-spinner'
 
-function loadingPage() {
+function LoadingPage() {
     return(
         <>
             <ThreeCircles
@@ -15,4 +15,4 @@ function loadingPage() {
     )
 }
 
-export default loadingPage
+export default LoadingPage
