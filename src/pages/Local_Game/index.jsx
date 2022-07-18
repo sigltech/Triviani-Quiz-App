@@ -36,6 +36,13 @@ const LocalGame = () => {
     { id: 20, name: 30 },
   ];
 
+  const PlayerOpt = [
+    { id: 10, name: 1 },
+    { id: 12, name: 2 },
+    { id: 14, name: 3 },
+    { id: 16, name: 4 },
+  ];
+
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate('/game');
@@ -53,6 +60,7 @@ const LocalGame = () => {
         <SelectInputs label="Difficulty" apiData={difficultyOpt} />
         <SelectInputs label="Game Type" apiData={typeOpt} />
         <SelectInputs label="Number Of Questions" apiData={numberOpt} />
+        <SelectInputs label="Number Of Players" apiData={PlayerOpt} />
         <input id='startgame-btn' type="submit" value="Start" />
       </form>
 

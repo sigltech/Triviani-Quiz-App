@@ -13,26 +13,24 @@ const IndexPage = () => {
 
   return (
     <>
-
-    <div className='index-container'>
-      <div className='homepage-container'>
-        <h1>Welcome to the Trivia Game</h1>
-        <div></div>
-        <button onClick={() => navigate('/localgame')}>Local Game</button>
-        <button>Online Game</button>
-
+      <div className="index-container">
+        <div className="homepage-container">
+          <h1>Welcome to the Trivia Game</h1>
+          <div></div>
+          <button onClick={() => navigate('/localgame')}>Local Game</button>
+          <button>Online Game</button>
+        </div>
       </div>
     </div>
 
-
-    {/* <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}>
 
       <label htmlFor="username">Username:</label>
       <input type="text" id="username" placeholder="...Enter a username" />
       <input type="submit" id='submit-username-btn' value="Create username" />
     </form> */}
 
-{/*  
+      {/*  
     <h1 id='indexpage-header'>Joey Triviani</h1>
 
     <form className='indexpage-form'>
@@ -40,7 +38,6 @@ const IndexPage = () => {
       <input type="text" id="username" value="...Enter a username" />
       <input id='username-submit' type="submit" value="Create username" />
     </form> */}
-
     </>
   );
 };

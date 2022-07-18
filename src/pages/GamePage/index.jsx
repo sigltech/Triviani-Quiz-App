@@ -1,26 +1,59 @@
-import React, {useState} from "react";
-import axios from 'axios';
+import React, { useState } from 'react';
+import useAxios from '../../hooks/useAxios';
+import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
 import Countdown from "react-countdown";
 
+function GamePage() {
+  const {
+    question_category,
+    question_difficulty,
+    question_type,
+    questionsAmount,
+    players,
+  } = useSelector((state) => state);
 
-function GamePage({}) {
-    
-    const [answers, setAnswers] = useState('');
+  let apiUrl = `api.php?amount=${questionsAmount}`;
 
-    async function getApi() {
-        try {
-            const result = await axios.get (
-             `https://opentdb.com/api.php?amount=10&category=20&difficulty=easy&type=multiple`   
-            );
-            setAnswers(result.data)
-            console.log(result.data);
-        }catch (err) {
-            console.log(err)
-        }
-    }
+  if (question_category) {
+    apiUrl = apiUrl.concat(`&category=${question_category}`);
+  }
+  if (question_difficulty) {
+    apiUrl = apiUrl.concat(`&difficulty=${question_difficulty}`);
+  }
+  if (question_type) {
+    apiUrl = apiUrl.concat(`&type=${question_type}`);
+  }
 
-    const renderer = ({ hours, minutes, seconds, completed }) => {
+  const { response, error, loading } = useAxios({ url: apiUrl });
+
+  if (loading) {
+    return <h1>put spinner here</h1>;
+  }
+  console.log(response);
+  console.log(
+    question_category,
+    question_difficulty,
+    question_type,
+    questionsAmount,
+    players
+  );
+
+  //   const [answers, setAnswers] = useState('');
+
+  //   async function getApi() {
+  //     try {
+  //       const result = await axios.get(
+  //         `https://opentdb.com/api.php?amount=10&category=20&difficulty=easy&type=multiple`
+  //       );
+  //       setAnswers(result.data);
+  //       console.log(result.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
+  
+      const renderer = ({ hours, minutes, seconds, completed }) => {
         if (completed) {
             // Render a completed state
             return <span>Time's up!</span>;
@@ -29,12 +62,10 @@ function GamePage({}) {
             return <span>{hours}:{minutes}:{seconds}</span>;
         }
     }
-    
 
-    return(
-        <div className="gamePage">
-
-            <div className='game-container'>
+  return (
+    <div className="gamePage">
+      <div className='game-container'>
                 <div className='gamepage-container'>
 
                     <div className="countDown">
@@ -60,8 +91,8 @@ function GamePage({}) {
 
                 </div>
             </div>
-        </div>
-    )
+    </div>
+  );
 }
 
 export default GamePage;
