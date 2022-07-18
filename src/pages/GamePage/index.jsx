@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useAxios from '../../hooks/useAxios';
 import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
-import Countdown from "react-countdown";
+import Countdown from 'react-countdown';
 import { LoadingPage } from '../../components/index.jsx';
 
 function GamePage() {
@@ -56,16 +56,20 @@ function GamePage() {
   //       console.log(err);
   //     }
   //   }
-  
-      const renderer = ({ hours, minutes, seconds, completed }) => {
-        if (completed) {
-            // Render a completed state
-            return <span>Time's up!</span>;
-        } else {
-            // Render a countdown
-            return <span>{hours}:{minutes}:{seconds}</span>;
-        }
+
+  const renderer = ({ hours, minutes, seconds, completed }) => {
+    if (completed) {
+      // Render a completed state
+      return <span>Time's up!</span>;
+    } else {
+      // Render a countdown
+      return (
+        <span>
+          {hours}:{minutes}:{seconds}
+        </span>
+      );
     }
+  };
 
     const handleAnswerSelect = (e) => {
         console.log(e.target.textContent);
@@ -120,12 +124,49 @@ function GamePage() {
                         <div className="answerCard"> <h4> answer4</h4> </div> */}
                     </div>
 
-                    <div>
-                        <button style={{color: '#000'}} onClick={() => {console.log('clicked')}}>Test socket connection</button>
-                    </div>
+          <div>
+            <h1>Question</h1>
+          </div>
 
+          <button /*onClick={getApi}*/> press for questions </button>
+          <div className="answers">
+            <h3>Question: </h3>
+            <div className="divide">
+              <div>
+                <div className="answerCard">
+                  {' '}
+                  <h4> answer1</h4>{' '}
                 </div>
+                <div className="answerCard">
+                  {' '}
+                  <h4> answer2</h4>{' '}
+                </div>
+              </div>
+              <div>
+                <div className="answerCard">
+                  {' '}
+                  <h4> answer3</h4>{' '}
+                </div>
+                <div className="answerCard">
+                  {' '}
+                  <h4> answer4</h4>{' '}
+                </div>
+              </div>
             </div>
+          </div>
+
+          <div>
+            <button
+              style={{ color: '#000' }}
+              onClick={() => {
+                console.log('clicked');
+              }}
+            >
+              Test socket connection
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
