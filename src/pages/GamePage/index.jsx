@@ -132,36 +132,8 @@ function GamePage() {
                     </div>
 
           <div>
-            <h1>Question</h1>
-          </div>
 
-          <button /*onClick={getApi}*/> press for questions </button>
 
-            <div className="divide">
-              <div>
-                <div className="answerCard">
-                  {' '}
-                  <h4> answer1</h4>{' '}
-                </div>
-                <div className="answerCard">
-                  {' '}
-                  <h4> answer2</h4>{' '}
-                </div>
-              </div>
-              <div>
-                <div className="answerCard">
-                  {' '}
-                  <h4> answer3</h4>{' '}
-                </div>
-                <div className="answerCard">
-                  {' '}
-                  <h4> answer4</h4>{' '}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div>
             <button
               style={{ color: '#000' }}
               onClick={() => {
