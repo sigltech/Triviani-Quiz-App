@@ -1,16 +1,16 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { SelectInputs } from '../../components';
-import useAxios from '../../hooks/useAxios';
-import './style.css';
-import { LoadingPage } from '../../components/index.jsx';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { SelectInputs } from "../../components";
+import useAxios from "../../hooks/useAxios";
+import "./style.css";
+import { LoadingPage } from "../../components/index.jsx";
 
 const LocalGame = () => {
   const navigate = useNavigate();
 
-  const { response, loading, error } = useAxios({ url: 'api_category.php' });
+  const { response, Loading, error } = useAxios({ url: "api_category.php" });
 
-  if (loading) {
+  if (Loading) {
     return <LoadingPage />;
   }
   if (error) {
@@ -18,14 +18,14 @@ const LocalGame = () => {
   }
 
   const difficultyOpt = [
-    { id: 'easy', name: 'Easy' },
-    { id: 'medium', name: 'Medium' },
-    { id: 'hard', name: 'Hard' },
+    { id: "easy", name: "Easy" },
+    { id: "medium", name: "Medium" },
+    { id: "hard", name: "Hard" },
   ];
 
   const typeOpt = [
-    { id: 'multiple', name: 'Multiple Choice' },
-    { id: 'boolean', name: 'True/False' },
+    { id: "multiple", name: "Multiple Choice" },
+    { id: "boolean", name: "True/False" },
   ];
 
   const numberOpt = [
@@ -46,7 +46,7 @@ const LocalGame = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/game');
+    navigate("/game");
   };
 
   return (

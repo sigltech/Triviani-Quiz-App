@@ -1,4 +1,7 @@
 /* istanbul ignore file */
+// import axios from "axios";
+// import React, { useState } from 'react';
+
 import {
   CHANGE_CATEGORY,
   CHANGE_DIFFICULTY,
@@ -38,7 +41,25 @@ export const handleUsernameChange = (payload) => ({
   type: CHANGE_USERNAME,
   payload,
 });
+
 export const handlePlayerChange = (payload) => ({
   type: CHANGE_PLAYER,
   payload,
 });
+
+// export const fetchData = () => {
+//     const [answers, setAnswers] = useState('');
+
+//     return (dispatch) => {
+//       dispatch(fetchDataRequest)
+//       try {
+//       const result = await axios.get('https://opentdb.com/api.php?amount=10&category=20&difficulty=easy&type=multiple')
+//       setAnswers(result.data)
+//       console.log(result.data);
+//       dispatch(fetchDataSuccess(answers))
+//       } catch (err) {
+//           console.log(err)
+//           dispatch(fetchDataFailure(err))
+//       }
+//     };
+//   };

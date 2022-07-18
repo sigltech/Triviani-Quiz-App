@@ -143,12 +143,7 @@ function GamePage() {
           <button /*onClick={getApi}*/> press for questions </button>
 
           <div className="answers">
-            <RenderQuestions />
-
-            {/* <div className="answerCard"> <h4> answer1</h4> </div>
-                        <div className="answerCard"> <h4> answer2</h4> </div>
-                        <div className="answerCard"> <h4> answer3</h4> </div>
-                        <div className="answerCard"> <h4> answer4</h4> </div> */}
+          
           </div>
 
           <div>
@@ -157,9 +152,9 @@ function GamePage() {
               Score: {intScore} / {response.results.length}
             </h3>
             <button
-              style={{ color: '#000' }}
+              style={{ color: "#000" }}
               onClick={() => {
-                console.log('clicked');
+                console.log("clicked");
               }}
             >
               Test socket connection
