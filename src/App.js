@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import {Routes, Route} from 'react-router-dom';
-import { OnlineGamePage, GameFinishPage, GamePage, LeaderboardPage } from './pages';
+import { OnlineGamePage, GameFinishPage, GamePage, IndexPage,LeaderboardPage } from './pages';
+import { Layout } from './components/Layout';
 
 
 function App() {

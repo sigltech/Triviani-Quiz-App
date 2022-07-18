@@ -2,6 +2,7 @@ import React from "react";
 import './style.css'
 
 export default function OnlineGamePage() {
+
     return (
         <>
             <h1 className="online-game-heading">Online Game</h1>
@@ -14,6 +15,8 @@ export default function OnlineGamePage() {
                     <form className="join-game-container">
                         <label htmlFor="room-number">Type in Room number</label>
                         <input type="number" name="room-number" id="room-number" />
+                        <label htmlFor="username">Type in your username</label>
+                        <input type="number" name="username" id="username" />
                         <button type="submit">Join game</button>
                     </form>
                 </div>
