@@ -5,6 +5,7 @@ import {
   CHANGE_SCORE,
   CHANGE_TYPE,
   CHANGE_USERNAME,
+  CHANGE_PLAYER,
 } from "./actionTypes";
 
 const initState = {
@@ -13,10 +14,11 @@ const initState = {
   question_difficulty: "",
   question_type: "",
   questionsAmount: 10,
+  players: 0,
   intScore: 0,
 };
-
 const Reducer = (state = initState, action) => {
+  // console.log(action.payload)
   switch (action.type) {
     case CHANGE_CATEGORY:
       return {
@@ -47,6 +49,11 @@ const Reducer = (state = initState, action) => {
       return {
         ...state,
         username: action.payload,
+      };
+    case CHANGE_PLAYER:
+      return {
+        ...state,
+        players: action.payload,
       };
     default:
       return state;
