@@ -2,7 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SelectInputs } from '../../components';
 import useAxios from '../../hooks/useAxios';
-import './style.css'
+import LoadingPage from '../../components';
+import './style.css';
 
 const LocalGame = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const LocalGame = () => {
   const { response, loading, error } = useAxios({ url: 'api_category.php' });
 
   if (loading) {
-    return <h1>Put loading component here</h1>;
+    return <LoadingPage />;
   }
   if (error) {
     return <h1>Put error component here</h1>;
@@ -50,21 +51,21 @@ const LocalGame = () => {
 
   return (
     <div className="">
-
-      <div className='Localgame-container'>
-      <div className='localgame-inputs-container'>
-
-      <h1>Local Game</h1>
-      <form onSubmit={handleSubmit}>
-        <SelectInputs label="Category" apiData={response.trivia_categories} />
-        <SelectInputs label="Difficulty" apiData={difficultyOpt} />
-        <SelectInputs label="Game Type" apiData={typeOpt} />
-        <SelectInputs label="Number Of Questions" apiData={numberOpt} />
-        <SelectInputs label="Number Of Players" apiData={PlayerOpt} />
-        <input id='startgame-btn' type="submit" value="Start" />
-      </form>
-
-      </div>
+      <div className="Localgame-container">
+        <div className="localgame-inputs-container">
+          <h1>Local Game</h1>
+          <form onSubmit={handleSubmit}>
+            <SelectInputs
+              label="Category"
+              apiData={response.trivia_categories}
+            />
+            <SelectInputs label="Difficulty" apiData={difficultyOpt} />
+            <SelectInputs label="Game Type" apiData={typeOpt} />
+            <SelectInputs label="Number Of Questions" apiData={numberOpt} />
+            <SelectInputs label="Number Of Players" apiData={PlayerOpt} />
+            <input id="startgame-btn" type="submit" value="Start" />
+          </form>
+        </div>
       </div>
     </div>
   );
