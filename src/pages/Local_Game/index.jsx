@@ -1,44 +1,56 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SelectInputs } from '../../components';
+import useAxios from '../../hooks/useAxios';
 
 const LocalGame = () => {
+  const navigate = useNavigate();
+  const { response, loading, error } = useAxios({ url: 'api_category.php' });
+
+  if (loading) {
+    return <h1>Put loading component here</h1>;
+  }
+  if (error) {
+    return <h1>Put error component here</h1>;
+  }
+
+  const difficultyOpt = [
+    { id: 'easy', name: 'Easy' },
+    { id: 'medium', name: 'Medium' },
+    { id: 'hard', name: 'Hard' },
+  ];
+
+  const typeOpt = [
+    { id: 'multiple', name: 'Multiple Choice' },
+    { id: 'boolean', name: 'True/False' },
+  ];
+
+  const numberOpt = [
+    { id: 10, name: 5 },
+    { id: 12, name: 10 },
+    { id: 14, name: 15 },
+    { id: 16, name: 20 },
+    { id: 18, name: 25 },
+    { id: 20, name: 30 },
+  ];
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate('/game');
+  };
+
   return (
-    <>
+    <div className="">
       <h1>Local Game</h1>
 
-      <form action="">
-        <label htmlFor="">Number Of Players</label>
-        <input type="number" />
-
-        <label htmlFor="">Number Of Questions</label>
-        <input type="number" />
-
-        <label htmlFor="Difficulty">Difficulty</label>
-        <select>
-          <option>....</option>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-
-        <label htmlFor="">set game time </label>
-        <select>
-          <option>....</option>
-          <option value="2min">2min</option>
-          <option value="4min">4min</option>
-          <option value="6min">6min</option>
-        </select>
-
-        <label htmlFor="">Category</label>
-        <select>
-          <option>....</option>
-          <option value="anime">Anime & Manga</option>
-          <option value="sports">Sports</option>
-          <option value="computers">Computers</option>
-        </select>
-
+      <form onSubmit={handleSubmit}>
+        <SelectInputs label="Category" apiData={response.trivia_categories} />
+        <SelectInputs label="Difficulty" apiData={difficultyOpt} />
+        <SelectInputs label="Game Type" apiData={typeOpt} />
+        <SelectInputs label="Number Of Questions" apiData={numberOpt} />
         <input type="submit" value="Start" />
       </form>
-    </>
+    </div>
   );
 };
 
