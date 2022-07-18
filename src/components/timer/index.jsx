@@ -18,7 +18,7 @@ const renderTime = ({ remainingTime }) => {
   );
 };
 
-function App() {
+export default function Timer() {
   return (
     <div className="App">
       <h1>
@@ -44,6 +44,3 @@ function App() {
     </div>
   );
 }
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
