@@ -1,6 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from 'axios';
 
-function GamePage() {
+function GamePage({}) {
+    
+    const [answers, setAnswers] = useState('');
+
+    async function getApi() {
+        try {
+            const result = await axios.get (
+             `https://opentdb.com/api.php?amount=10&category=20&difficulty=easy&type=multiple`   
+            );
+            setAnswers(result.data)
+            console.log(result.data);
+        }catch (err) {
+            console.log(err)
+        }
+    }
+    
+
     return(
         <div className="gamePage">
 
@@ -9,14 +26,16 @@ function GamePage() {
             </div>
 
             <div>
+                
                 <h1>Question</h1>
             </div>
 
             <div className="answers">
-                <div className="answerCard"> <h4> answer1</h4> </div>
-                <div className="answerCard"> <h4> answer1</h4> </div>
-                <div className="answerCard"> <h4> answer1</h4> </div>
-                <div className="answerCard"> <h4> answer1</h4> </div>
+            <button onClick={getApi}> press for questions </button>
+                {/* <div className="answerCard"> <h4> answer1</h4> </div>
+                <div className="answerCard"> <h4> answer2</h4> </div>
+                <div className="answerCard"> <h4> answer3</h4> </div>
+                <div className="answerCard"> <h4> answer4</h4> </div> */}
             </div>
 
             <div>
