@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useAxios from '../../hooks/useAxios';
 import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
 import{ useNavigate } from 'react-router';
 import Countdown from 'react-countdown';
-import { LoadingPage } from '../../components/index.jsx';
+import { LoadingPage, RenderQuestions } from '../../components/index.jsx';
 import { handleScoreChange } from '../../redux/action';
 
 function GamePage() {
   const [questionIndex, setQuestionIndex] = useState(0);
+  const [timer, setTimer] = useState(11000);
   const navigate = useNavigate();
-  const [timer, setTimer] = useState(10000);
-
+  const dispatch = useDispatch();
+  
   const {
     question_category,
     question_difficulty,
@@ -20,12 +21,10 @@ function GamePage() {
     players,
     intScore,
   } = useSelector((state) => state);
-
-  const dispatch = useDispatch();
-
-
+  
   let apiUrl = `api.php?amount=${questionsAmount}`;
-
+  
+  console.log(questionsAmount);
   if (question_category) {
     apiUrl = apiUrl.concat(`&category=${question_category}`);
   }
@@ -35,9 +34,9 @@ function GamePage() {
   if (question_type) {
     apiUrl = apiUrl.concat(`&type=${question_type}`);
   }
-
+  console.log(apiUrl);
   const { response, error, loading } = useAxios({ url: apiUrl });
-
+  
   if (loading) {
     return <LoadingPage />;
   }
@@ -49,6 +48,8 @@ function GamePage() {
     questionsAmount,
     players
   );
+  console.log(questionIndex, response.results.length)
+  console.log(response.results[questionIndex].question)
 
   //   const [answers, setAnswers] = useState('');
 
@@ -67,6 +68,8 @@ function GamePage() {
   const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
       // Render a completed state
+      setQuestionIndex(questionIndex + 1);
+      // completed = false;
       return <span>Time's up!</span>;
     } else {
       // Render a countdown
@@ -78,92 +81,83 @@ function GamePage() {
     }
   };
 
-
+  
   const handleAnswerSelect = (e) => {
     // console.log(e.target.textContent);
     // console.log(response.results[0].correct_answer);
     // console.log(typeof response.results[0].correct_answer);
     // console.log(typeof e.target.textContent);
-    if (
-      e.target.textContent === response.results[questionIndex].correct_answer
-    ) {
-      console.log(
-        `Correct answer is ${response.results[questionIndex].correct_answer}`
-      );
+    if (e.target.textContent === response.results[questionIndex].correct_answer && questionIndex < response.results.length -1) {
+
+      console.log(`Correct answer is ${response.results[questionIndex].correct_answer}`);
       dispatch(handleScoreChange(intScore + 1));
-      console.log(intScore);
+      // console.log(intScore);
       setQuestionIndex(questionIndex + 1);
-      setTimer(10000);
-    } 
-    else if (response.results.length >= response.results.length ){
+      // console.log(questionIndex, response.results.length);
+    } else if (questionIndex >= response.results.length -1 ){
         navigate('/finish')
-    }
-    else {
-      console.log(`That's is the wrong answer`);
-
+    } else if (questionIndex < response.results.length -1) {
+      setQuestionIndex(questionIndex + 1);
     }
   };
 
-  const RenderQuestions = () => {
-    return (
-      <>
-        {response.results[questionIndex].incorrect_answers.map(
-          (answer, index) => {
-            return (
-              <div
-                type="button"
-                onClick={handleAnswerSelect}
-                className="answerCard"
-                key={index}
-                dangerouslySetInnerHTML={{ __html: answer }}
-              ></div>
-            );
-          }
-        )}
+//   else if(response.results[questionIndex].length -1 === questionIndex){
+//     navigate('/finish')
+//     setQuestionIndex(0);
+//     console.log(questionIndex, response.results.length);
+    
+//   } else {
+//   setQuestionIndex(questionIndex + 1);
+// //   console.log(`That's is the wrong answer`);
+//   }
 
-        <div onClick={handleAnswerSelect} className="answerCard">
-          {response.results[questionIndex].correct_answer}
-        </div>
-      </>
-    );
-  };
+  
 
   return (
-    <div className="gamePage">
-      <div className="game-container">
-        <div className="gamepage-container">
-          <div className="countDown">
-            <Countdown date={Date.now() + timer} renderer={renderer} />
-          </div>
+    <>
+      <div className="gamePage">
+        <div className="game-container">
+          <div className="gamepage-container">
+            <div className="countDown">
 
-          <div>
-            <h1>{response.results[questionIndex].question}</h1>
-          </div>
+              <Countdown
+                intervalDelay={1000}
+                precision={3}
+                date={Date.now() + timer} 
+                renderer={renderer}
+                key={questionIndex}
+                autoStart={true}
+                onComplete={() => {questionIndex === response.results.length -2 ? navigate('/finish') : setQuestionIndex(questionIndex + 1)}}
+              />
 
-          <button /*onClick={getApi}*/> press for questions </button>
+            </div>
 
-          <div className="answers">
-          
-          </div>
+            <div>
+              <h1>{response.results[questionIndex].question}</h1>
+            </div>
 
-          <div>
-            <h3>
-              {' '}
-              Score: {intScore} / {response.results.length}
-            </h3>
-            <button
-              style={{ color: "#000" }}
-              onClick={() => {
-                console.log("clicked");
-              }}
-            >
-              Test socket connection
-            </button>
+            <div className="answers">
+              <RenderQuestions  response={response} questionIndex={questionIndex} handleAnswerSelect={handleAnswerSelect}/>
+            </div>
+
+            <div>
+              <h3>
+                {' '}
+                Score: {intScore} / {response.results.length}
+              </h3>
+              {/* <button
+                style={{ color: "#000" }}
+                onClick={() => {
+                  console.log("clicked");
+                }}
+              >
+                Test socket connection
+              </button> */}
+            </div>
           </div>
-        </div>
-        </div>
+          </div>
       </div>
-
+    </>
   );
 }
 
