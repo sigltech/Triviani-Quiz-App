@@ -4,3 +4,4 @@ export { default as Timer } from './Timer';
 export {default as DarkModeToggle} from './DarkModeToggle';
 export {default as LeaderBoardChart} from './LeaderBoardChart';
 export {default as LeaderBoardList} from './LeaderBoardList';
+export {default as RenderQuestions} from './RenderQuestions';

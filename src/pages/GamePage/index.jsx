@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
 import{ useNavigate } from 'react-router';
 import Countdown from 'react-countdown';
-import { LoadingPage } from '../../components/index.jsx';
+import { LoadingPage, RenderQuestions } from '../../components/index.jsx';
 import { handleScoreChange } from '../../redux/action';
 
 function GamePage() {
@@ -23,9 +23,8 @@ function GamePage() {
   } = useSelector((state) => state);
   
   let apiUrl = `api.php?amount=${questionsAmount}`;
-  const { response, error, loading } = useAxios({ url: apiUrl });
-
-
+  
+  console.log(questionsAmount);
   if (question_category) {
     apiUrl = apiUrl.concat(`&category=${question_category}`);
   }
@@ -35,8 +34,9 @@ function GamePage() {
   if (question_type) {
     apiUrl = apiUrl.concat(`&type=${question_type}`);
   }
-
-
+  console.log(apiUrl);
+  const { response, error, loading } = useAxios({ url: apiUrl });
+  
   if (loading) {
     return <LoadingPage />;
   }
@@ -49,6 +49,7 @@ function GamePage() {
     players
   );
   console.log(questionIndex, response.results.length)
+  console.log(response.results[questionIndex].question)
 
   //   const [answers, setAnswers] = useState('');
 
@@ -68,7 +69,7 @@ function GamePage() {
     if (completed) {
       // Render a completed state
       setQuestionIndex(questionIndex + 1);
-      completed = false;
+      // completed = false;
       return <span>Time's up!</span>;
     } else {
       // Render a countdown
@@ -86,47 +87,31 @@ function GamePage() {
     // console.log(response.results[0].correct_answer);
     // console.log(typeof response.results[0].correct_answer);
     // console.log(typeof e.target.textContent);
-    if (e.target.textContent === response.results[questionIndex].correct_answer) {
+    if (e.target.textContent === response.results[questionIndex].correct_answer && questionIndex < response.results.length -1) {
 
       console.log(`Correct answer is ${response.results[questionIndex].correct_answer}`);
       dispatch(handleScoreChange(intScore + 1));
       // console.log(intScore);
       setQuestionIndex(questionIndex + 1);
       // console.log(questionIndex, response.results.length);
-    } 
-    // else if (questionIndex >= response.results.length ){
-    //     navigate('/finish')
-    // }
-    else {
+    } else if (questionIndex >= response.results.length -1 ){
+        navigate('/finish')
+    } else if (questionIndex < response.results.length -1) {
       setQuestionIndex(questionIndex + 1);
-    //   console.log(`That's is the wrong answer`);
-
     }
   };
 
-  const RenderQuestions = () => {
-    return (
-      <>
-        {response.results[questionIndex].incorrect_answers.map(
-          (answer, index) => {
-            return (
-              <div
-                type="button"
-                onClick={handleAnswerSelect}
-                className="answerCard"
-                key={index}
-                dangerouslySetInnerHTML={{ __html: answer }}
-              ></div>
-            );
-          }
-        )}
+//   else if(response.results[questionIndex].length -1 === questionIndex){
+//     navigate('/finish')
+//     setQuestionIndex(0);
+//     console.log(questionIndex, response.results.length);
+    
+//   } else {
+//   setQuestionIndex(questionIndex + 1);
+// //   console.log(`That's is the wrong answer`);
+//   }
 
-        <div onClick={handleAnswerSelect} className="answerCard">
-          {response.results[questionIndex].correct_answer}
-        </div>
-      </>
-    );
-  };
+  
 
   return (
     <>
@@ -142,7 +127,7 @@ function GamePage() {
                 renderer={renderer}
                 key={questionIndex}
                 autoStart={true}
-                onComplete={() => {questionIndex === response.results.length ? navigate('/finish') : setQuestionIndex(questionIndex + 1)}}
+                onComplete={() => {questionIndex === response.results.length -2 ? navigate('/finish') : setQuestionIndex(questionIndex + 1)}}
               />
 
             </div>
@@ -152,7 +137,7 @@ function GamePage() {
             </div>
 
             <div className="answers">
-              <RenderQuestions />
+              <RenderQuestions  response={response} questionIndex={questionIndex} handleAnswerSelect={handleAnswerSelect}/>
             </div>
 
             <div>
