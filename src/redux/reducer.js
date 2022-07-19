@@ -18,7 +18,7 @@ const initState = {
   intScore: 0,
 };
 const Reducer = (state = initState, action) => {
-  // console.log(action.payload)
+  console.log(state.intScore)
   switch (action.type) {
     case CHANGE_CATEGORY:
       return {
