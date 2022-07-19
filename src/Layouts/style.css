@@ -1,3 +1,12 @@
+html {
+  overflow:hidden
+}
+
+.main-container {
+  overflow: hidden;
+  width: 100%;
+}
+
 .darkmode-active {
     background-color: #282c34;
     color: white;
@@ -8,13 +17,25 @@
 
 .darkModeToggle {
     position: absolute;
-    top: 0;
+    top: 20px;
     right: 0;
     z-index: 1;
     border-radius: 0.25rem;
     padding: 0.5rem;
     cursor: pointer;
     transition: all 1s ease-in-out;
+    animation: slide-in-right 1s ease-in-out;
+}
+
+@keyframes slide-in-right {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 /* The switch - the box around the slider */
@@ -74,5 +95,39 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+/* Back button */
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+  border-radius: 0.25rem;
+  border: 3px solid rgb(255, 255, 255, 0);
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  animation: slide-in-left 1s ease-in-out;
+  color: #000;
+  font-size: 1.6rem;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-150%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.back-btn:hover {
+  background-color: rgba(255, 255, 255, 0);
+  color: #fff;
+  border: 3px solid rgb(255, 255, 255);
 }
 

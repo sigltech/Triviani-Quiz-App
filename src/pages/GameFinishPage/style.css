@@ -1,0 +1,31 @@
+.reset-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1;
+    border-radius: 0.25rem;
+    border: 3px solid rgb(255, 255, 255, 0);
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    animation: slide-in-left 1s ease-in-out;
+    color: #000;
+    font-size: 1.6rem;
+  }
+  
+  @keyframes slide-in-left {
+    0% {
+      transform: translateX(-150%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .reset-btn:hover {
+    background-color: rgba(255, 255, 255, 0);
+    color: #fff;
+    border: 3px solid rgb(255, 255, 255);
+  }

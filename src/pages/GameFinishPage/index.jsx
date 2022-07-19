@@ -1,6 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { LeaderBoardChart, LeaderBoardList } from "../../components";
+import './style.css';
 
 function GameFinishPage() {
+    const navigate = useNavigate();
 
     return(
         <div className="gameFinish">
@@ -19,10 +23,11 @@ function GameFinishPage() {
 
             <div className="leadership chart">
                 <h1> LEADERSHIP CHART GOES HERE</h1>
+                <LeaderBoardChart />
 
             </div>
 
-            <button> PLAY AGAIN? </button>
+            <button className="reset-btn" onClick={() => navigate('/localgame')}> PLAY AGAIN? </button>
 
         </div>
     )

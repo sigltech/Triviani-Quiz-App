@@ -2,8 +2,17 @@ import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { OnlineGamePage, GameFinishPage, GamePage, IndexPage, LeaderboardPage, LocalGame } from './pages';
-
 import Layout from './Layouts';
+// import {decode} from 'html-entities';
+
+// decode('&lt; &gt; &quot; &apos; &amp; &#169; &#8710;');
+// // -> '< > " \' & © ∆'
+
+// decode('&copy;', {level: 'html5'});
+// // -> '©'
+
+// decode('&copy;', {level: 'xml'});
+// // -> '&copy;'
 
 
 function App() {
