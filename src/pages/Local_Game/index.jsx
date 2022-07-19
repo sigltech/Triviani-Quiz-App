@@ -29,12 +29,12 @@ const LocalGame = () => {
   ];
 
   const numberOpt = [
-    { id: 10, name: 5 },
-    { id: 12, name: 10 },
-    { id: 14, name: 15 },
-    { id: 16, name: 20 },
-    { id: 18, name: 25 },
-    { id: 20, name: 30 },
+    { id: 5, name: 5 },
+    { id: 10, name: 10 },
+    { id: 15, name: 15 },
+    { id: 20, name: 20 },
+    { id: 25, name: 25 },
+    { id: 30, name: 30 },
   ];
 
   const PlayerOpt = [
@@ -63,6 +63,7 @@ const LocalGame = () => {
             <SelectInputs label="Game Type" apiData={typeOpt} />
             <SelectInputs label="Number Of Questions" apiData={numberOpt} />
             <SelectInputs label="Number Of Players" apiData={PlayerOpt} />
+            <input type="text" id='username-input' />
             <input id="startgame-btn" type="submit" value="Start" />
           </form>
         </div>

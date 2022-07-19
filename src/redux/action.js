@@ -9,6 +9,7 @@ import {
   CHANGE_TYPE,
   CHANGE_SCORE,
   CHANGE_USERNAME,
+  CHANGE_PLAYERS,
   CHANGE_PLAYER,
 } from "./actionTypes";
 
@@ -39,6 +40,11 @@ export const handleScoreChange = (payload) => ({
 
 export const handleUsernameChange = (payload) => ({
   type: CHANGE_USERNAME,
+  payload,
+});
+
+export const handlePlayersChange = (payload) => ({
+  type: CHANGE_PLAYERS,
   payload,
 });
 

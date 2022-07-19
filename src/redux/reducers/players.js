@@ -1,6 +1,6 @@
 const defaultPlayersState = [];
 
-export default (state = defaultPlayersState, action) => {
+export default function Players(state = defaultPlayersState, action) {
   switch (action.type) {
     case "ADD_PLAYER":
       return [...state, action.player];

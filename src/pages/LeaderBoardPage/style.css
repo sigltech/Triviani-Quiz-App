@@ -1,0 +1,44 @@
+.leaderboard-container {
+    height: 50vh;
+}
+
+canvas#barchart {
+    display: inline; 
+    background: none;
+    width: 80vw !important;
+    overflow: hidden !important;
+    height: 450px !important;
+}
+
+#barchart-container  {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* ************* Leaderboard list styling ************* */
+
+.leaderboard-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 90%;
+    overflow: hidden;
+    height: max-content;
+    padding: 3rem;
+}
+
+table {
+    width: 80vw;
+    border-collapse: collapse;
+}
+
+th, td {
+    border-bottom: 4px solid rgb(171, 87, 227);
+    padding: 0.5rem 1rem;
+    text-align: center;
+}
+
+
