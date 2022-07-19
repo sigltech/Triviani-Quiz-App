@@ -57,7 +57,7 @@ const LocalGame = () => {
           <form onSubmit={handleSubmit}>
             <SelectInputs
               label="Category"
-              apiData={response.trivia_categories}
+              apiData={response && response.trivia_categories}
             />
             <SelectInputs label="Difficulty" apiData={difficultyOpt} />
             <SelectInputs label="Game Type" apiData={typeOpt} />

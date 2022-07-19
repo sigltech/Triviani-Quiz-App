@@ -40,6 +40,7 @@ const SelectInputs = ({ label, apiData }) => {
     <div>
       <label htmlFor={label}></label>
       <select
+        required
         className="select"
         label={label}
         value={value}
