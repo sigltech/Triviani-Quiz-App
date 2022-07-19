@@ -14,6 +14,7 @@ function App() {
 
   const joinRoom = () => {
     if (room !== "") {
+      console.log(`connected ${room}`)
       socket.emit("join_room", room)
     }
   }
@@ -24,6 +25,7 @@ function App() {
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
+      console.log(data)
       setMessageReceived(data.message)
     })
   }, [socket])
@@ -31,12 +33,12 @@ function App() {
     <div className="App">
 
       <input onChange={(event) => {
-        setMessage(event.target.value)
+        setRoom(event.target.value)
       }} placeholder='Room Number....' />
       <button onClick={joinRoom}>Join Room</button>
 
       <input onChange={(event) => {
-        setRoom(event.target.value)
+        setMessage(event.target.value)
       }} placeholder='message' />
 
       <button onClick={sendMessage}>send message</button>
