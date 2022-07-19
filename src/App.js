@@ -4,11 +4,13 @@ import { Routes, Route } from 'react-router-dom';
 import { OnlineGamePage, GameFinishPage, GamePage, IndexPage, LeaderboardPage, LocalGame } from './pages';
 
 import Layout from './Layouts';
+import { GoogleTranslate } from './components';
 
 
 function App() {
   return (
     <div className="App">
+      <GoogleTranslate />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<IndexPage />} />
