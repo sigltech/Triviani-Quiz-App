@@ -13,22 +13,42 @@
 }
 
 .homepage-container {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
     box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.5);
+    border: 2px solid rgb(0, 0, 0, 0.2);
     padding: 2rem;
+    animation: appear 1s ease-in-out;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.homepage-container h1 {
+    font-family: 'Indie Flower', cursive;
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 0 0 10px #000;
 }
 
 .homepage-container button {
     color: #000;
     margin: 1rem;
-    padding: 0.4rem 1rem;
+    padding: 1rem 2rem;
     border-radius: 7px;
     cursor: pointer;
     border: 3px solid rgb(255, 255, 255, 0);
+    font-size: 2rem;
 }
 
 .homepage-container button:hover {

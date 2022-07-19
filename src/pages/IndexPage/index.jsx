@@ -18,7 +18,7 @@ const IndexPage = () => {
           <h1>Welcome to the Trivia Game</h1>
           <div></div>
           <button onClick={() => navigate('/localgame')}>Local Game</button>
-          <button>Online Game</button>
+          <button onClick={() => navigate('/onlinegame')}>Online Game</button>
         </div>
       </div>
 

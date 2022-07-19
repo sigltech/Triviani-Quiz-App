@@ -7,7 +7,7 @@ export const defaultGame = {
   scoreboard: [],
 };
 
-export default (state = defaultGame, action) => {
+export default function Game(state = defaultGame, action) {
   switch (action.type) {
     case "SET_CATEGORIES":
       return {

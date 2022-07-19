@@ -1,6 +1,6 @@
 const defaultType = "";
 
-export default (state = defaultType, action) => {
+export default function ClientType(state = defaultType, action) {
   switch (action.type) {
     case "SET_HOST":
       return "HOST";
