@@ -49,6 +49,43 @@
     padding: 2rem;
 }
 
+.localgame-inputs-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 20px 20px 0 0;
+    padding: 0.5rem;
+}
+
+.header-btns {
+    display:flex;
+}
+
+.header-btns button{
+    color: #000;
+    margin: 1rem;
+    padding: 0.4rem 1rem;
+    border-radius: 7px;
+    cursor: pointer;
+    border: 3px solid rgb(255, 255, 255, 0);
+    text-align: center;
+    width: 100%;
+    font-size: 1.5rem;
+    animation: jiggleBtn 0.3s ease-in-out infinite;
+}
+
+.header-btns button:hover {
+    background: rgb(255, 255, 255, 0);
+    color: #fff;
+    border: 3px solid rgb(255, 255, 255);
+    transition: background 0.3s ease-in-out;
+
+}
+
 .localgame-inputs-container form {
     display: flex;
     flex-direction: column;
@@ -56,3 +93,25 @@
     align-items: center;
 }
 
+.addUsername {
+    display: flex;
+    flex-direction: column;
+}
+
+.addUsername input {
+    padding: 0.5rem;
+    margin: 0.3rem 0.3rem;
+    width: 464px;
+    text-align: center;
+    border-radius: 0.5rem;
+    border: none;
+    font-size: 1.5rem;
+    color: #000;
+    font-family: 'Indie Flower', cursive;
+}
+
+.addUsername input:hover {
+    background: #fff;
+    color: #000;
+    transition: background 0.3s ease-in-out;
+}

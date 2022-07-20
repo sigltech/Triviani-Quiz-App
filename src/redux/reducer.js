@@ -15,7 +15,7 @@ const initState = {
   question_difficulty: "",
   question_type: "",
   questionsAmount: 10,
-  players: 0,
+  players: 1,
   intScore: 0,
   player: [{ name: "", score: 0 }],
 };
