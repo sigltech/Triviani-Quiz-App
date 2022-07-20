@@ -17,7 +17,7 @@ const initState = {
   questionsAmount: 10,
   players: 1,
   intScore: 0,
-  player: [{ name: "", score: 0 }],
+  allPlayerRecords: [{ name: "", score: 0 }],
 };
 const Reducer = (state = initState, action) => {
   // console.log(action.payload)

@@ -14,21 +14,6 @@ function GamePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-
-  useEffect(() => {
-    const renderUsername = () => {
-      player.map((player, index) => {
-        return (
-          <div className="player">
-            <p key={index}>{player.name}</p>
-            <p key={index}>{player.score}</p>
-          </div>
-        );
-      })
-    }
-    renderUsername();
-  }, []);
-  
   const {
     question_category,
     question_difficulty,
@@ -57,7 +42,7 @@ function GamePage() {
   if (loading) {
     return <LoadingPage />;
   }
-  console.log(response);
+
   console.log(
     question_category,
     question_difficulty,
@@ -123,7 +108,8 @@ function GamePage() {
 
             <div>
               <h1>{response.results[questionIndex].question}</h1>
-              <h3>Player <span id='playerNum'></span>'s turn</h3>
+              {players}
+              <h3>Player <span id='playerNum'>{players.name}</span>'s turn</h3>
             </div>
 
             <div className="answers">

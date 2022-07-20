@@ -12,7 +12,7 @@ const LocalGame = () => {
   const dispatch = useDispatch();
   const [numPlayers, setNumPlayers] = useState();
 
-  const {players, player} = useSelector((state) => state.players);
+  const {players, Player} = useSelector((state) => state);
   
   const { response, Loading, error } = useAxios({ url: "api_category.php" });
 
@@ -43,26 +43,20 @@ const LocalGame = () => {
     { id: 30, name: 30 },
   ];
 
-  // const PlayerOpt = [
-  //   { id: 1, name: 1 },
-  //   { id: 2, name: 2 },
-  //   { id: 3, name: 3 },
-  //   { id: 4, name: 4 },
-  // ];
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    // dispatch(handlePlayersChange([...Player, {name: e.target.elements.username.value, score: 0}]));
     return (
       navigate("/game")
     )
   };
 
   console.log(`count number is: ${players}`)
-  console.log(`Player information: ${player}`)
+  console.log(`Player information: ${Player}`)
 
   const handleNewPlayerInput = () => {
     let counter = players;
-    const usernameDiv = document.querySelector(".addUsername");
+    const usernameDiv = document.querySelector("#addUsername");
     const newPlayerInput = document.createElement("input");
     newPlayerInput.setAttribute("type", "text");
     newPlayerInput.setAttribute("placeholder", "Player Name");
@@ -71,22 +65,25 @@ const LocalGame = () => {
     newPlayerInput.setAttribute("label", counter);
     let append = usernameDiv.appendChild(newPlayerInput);
     dispatch(handlePlayersChange(players + 1));
-    dispatch(handlePlayerChange({name: newPlayerInput.value, score: 0}));
     return (
       {append}
     )
   }
 
   const handleRemovePlayerInput = () => {
-    const usernameDiv = document.querySelector(".addUsername");
-    const removePlayerInput = document.querySelector(".addUsername input");
-
-    if(players <= 1) {
+    const usernameDiv = document.querySelector("#addUsername");
+    const removePlayerInput = usernameDiv.querySelector("input");
+    console.log(removePlayerInput);
+    // usernameDiv.removeChild(usernameDiv.querySelector(":nth-last-child(2)"))
+    if(players <= 1 || usernameDiv.childNodes.length <= 1) {
       alert("You must have at least one player")
-    } else {
-      usernameDiv.removeChild(removePlayerInput);
+      dispatch(handlePlayersChange(players));
+    } else if(players >= 2) {
       dispatch(handlePlayersChange(players - 1));
+      usernameDiv.removeChild(usernameDiv.removeChild(usernameDiv.querySelector(":nth-last-child(2)")))
+      console.log(`count number is: ${usernameDiv.childNodes}`)
     }
+
   }
 
   return (
