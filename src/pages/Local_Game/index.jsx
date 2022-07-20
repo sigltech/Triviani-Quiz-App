@@ -11,8 +11,11 @@ const LocalGame = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [numPlayers, setNumPlayers] = useState();
+  const [user, setUser] = useState([{name: "", score: 0}]);
+  const [inputValue, setInputValue] = useState("");
+  const [submitValue, setSubmitValue] = useState("");
 
-  const {players, Player} = useSelector((state) => state);
+  const {players, player} = useSelector((state) => state);
   
   const { response, Loading, error } = useAxios({ url: "api_category.php" });
 
@@ -43,16 +46,8 @@ const LocalGame = () => {
     { id: 30, name: 30 },
   ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // dispatch(handlePlayersChange([...Player, {name: e.target.elements.username.value, score: 0}]));
-    return (
-      navigate("/game")
-    )
-  };
-
-  console.log(`count number is: ${players}`)
-  console.log(`Player information: ${Player}`)
+  // console.log(`count number is: ${players}`)
+  // console.log(`Player information: ${Player}`)
 
   const handleNewPlayerInput = () => {
     let counter = players;
@@ -86,6 +81,21 @@ const LocalGame = () => {
 
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitValue(inputValue);
+    console.log(submitValue)
+    dispatch(handlePlayerChange([...player, {name: inputValue, score: 0}]));
+    // dispatch(handlePlayersChange([...Player, {name: e.target.elements.username.value, score: 0}]));
+    return (
+      navigate("/game")
+      )
+    };
+    console.log(user)
+    console.log(submitValue)
+
+
+
   return (
     <div className="">
       <div className="Localgame-container">
@@ -97,8 +107,8 @@ const LocalGame = () => {
             <button onClick={handleRemovePlayerInput}>Remove Player</button>
             </div>
           </div>
+          <AddUsername user={user} setUser={setUser} inputValue={inputValue} setInputValue={setInputValue}/>
           <form onSubmit={handleSubmit}>
-          <AddUsername handleNewPlayerInput={handleNewPlayerInput} handleRemovePlayerInput={handleRemovePlayerInput} setNumPlayers={setNumPlayers} numPlayers={numPlayers}/>
             <SelectInputs
               label="Category"
               apiData={response && response.trivia_categories}

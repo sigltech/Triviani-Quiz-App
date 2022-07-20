@@ -132,8 +132,7 @@ function GamePage() {
 
             <div>
               <h1>{response.results[questionIndex].question}</h1>
-              {players}
-              <h3>Player <span id='playerNum'>{players.name}</span>'s turn</h3>
+              <h3><span id='playerNum'>{player[1].name}</span>'s turn</h3>
             </div>
 
             <div className="answers">
