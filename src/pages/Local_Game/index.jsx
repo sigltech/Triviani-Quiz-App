@@ -1,10 +1,10 @@
-import React, { useState} from "react";
-import { useNavigate } from "react-router-dom";
-import { SelectInputs } from "../../components";
-import useAxios from "../../hooks/useAxios";
-import "./style.css";
-import { LoadingPage, AddUsername } from "../../components/index.jsx";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SelectInputs } from '../../components';
+import useAxios from '../../hooks/useAxios';
+import './style.css';
+import { LoadingPage, AddUsername } from '../../components/index.jsx';
+import { useSelector, useDispatch } from 'react-redux';
 import { handlePlayersChange, handlePlayerChange } from '../../redux/action';
 
 const LocalGame = () => {
@@ -12,9 +12,9 @@ const LocalGame = () => {
   const dispatch = useDispatch();
   const [numPlayers, setNumPlayers] = useState();
 
-  const {players, Player} = useSelector((state) => state);
-  
-  const { response, Loading, error } = useAxios({ url: "api_category.php" });
+  const { players, allPlayerRecords } = useSelector((state) => state);
+  console.log(`16 localgame`, allPlayerRecords);
+  const { response, Loading, error } = useAxios({ url: 'api_category.php' });
 
   if (Loading) {
     return <LoadingPage />;
@@ -24,14 +24,14 @@ const LocalGame = () => {
   }
 
   const difficultyOpt = [
-    { id: "easy", name: "Easy" },
-    { id: "medium", name: "Medium" },
-    { id: "hard", name: "Hard" },
+    { id: 'easy', name: 'Easy' },
+    { id: 'medium', name: 'Medium' },
+    { id: 'hard', name: 'Hard' },
   ];
 
   const typeOpt = [
-    { id: "multiple", name: "Multiple Choice" },
-    { id: "boolean", name: "True/False" },
+    { id: 'multiple', name: 'Multiple Choice' },
+    { id: 'boolean', name: 'True/False' },
   ];
 
   const numberOpt = [
@@ -46,45 +46,42 @@ const LocalGame = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // dispatch(handlePlayersChange([...Player, {name: e.target.elements.username.value, score: 0}]));
-    return (
-      navigate("/game")
-    )
+    return navigate('/game');
   };
 
-  console.log(`count number is: ${players}`)
-  console.log(`Player information: ${Player}`)
+  console.log(`count number is: ${players}`);
+  console.log(`Player information: ${allPlayerRecords}`);
 
   const handleNewPlayerInput = () => {
     let counter = players;
-    const usernameDiv = document.querySelector("#addUsername");
-    const newPlayerInput = document.createElement("input");
-    newPlayerInput.setAttribute("type", "text");
-    newPlayerInput.setAttribute("placeholder", "Player Name");
-    newPlayerInput.setAttribute("key", counter);
-    newPlayerInput.setAttribute("required", "true");
-    newPlayerInput.setAttribute("label", counter);
+    const usernameDiv = document.querySelector('#addUsername');
+    const newPlayerInput = document.createElement('input');
+    newPlayerInput.setAttribute('type', 'text');
+    newPlayerInput.setAttribute('placeholder', 'Player Name');
+    newPlayerInput.setAttribute('key', counter);
+    newPlayerInput.setAttribute('required', 'true');
+    newPlayerInput.setAttribute('label', counter);
     let append = usernameDiv.appendChild(newPlayerInput);
     dispatch(handlePlayersChange(players + 1));
-    return (
-      {append}
-    )
-  }
+    return { append };
+  };
 
   const handleRemovePlayerInput = () => {
-    const usernameDiv = document.querySelector("#addUsername");
-    const removePlayerInput = usernameDiv.querySelector("input");
+    const usernameDiv = document.querySelector('#addUsername');
+    const removePlayerInput = usernameDiv.querySelector('input');
     console.log(removePlayerInput);
     // usernameDiv.removeChild(usernameDiv.querySelector(":nth-last-child(2)"))
-    if(players <= 1 || usernameDiv.childNodes.length <= 1) {
-      alert("You must have at least one player")
+    if (players <= 1 || usernameDiv.childNodes.length <= 1) {
+      alert('You must have at least one player');
       dispatch(handlePlayersChange(players));
-    } else if(players >= 2) {
+    } else if (players >= 2) {
       dispatch(handlePlayersChange(players - 1));
-      usernameDiv.removeChild(usernameDiv.removeChild(usernameDiv.querySelector(":nth-last-child(2)")))
-      console.log(`count number is: ${usernameDiv.childNodes}`)
+      usernameDiv.removeChild(
+        usernameDiv.removeChild(usernameDiv.querySelector(':nth-last-child(2)'))
+      );
+      console.log(`count number is: ${usernameDiv.childNodes}`);
     }
-
-  }
+  };
 
   return (
     <div className="">
@@ -93,12 +90,18 @@ const LocalGame = () => {
           <div className="localgame-inputs-header">
             <h1>Local Game</h1>
             <div className="header-btns">
-            <button onClick={handleNewPlayerInput}>add Player</button>
-            <button onClick={handleRemovePlayerInput}>Remove Player</button>
+              <button onClick={handleNewPlayerInput}>add Player</button>
+              <button onClick={handleRemovePlayerInput}>Remove Player</button>
             </div>
           </div>
           <form onSubmit={handleSubmit}>
-          <AddUsername handleNewPlayerInput={handleNewPlayerInput} handleRemovePlayerInput={handleRemovePlayerInput} setNumPlayers={setNumPlayers} numPlayers={numPlayers}/>
+            <AddUsername
+              label="Username"
+              handleNewPlayerInput={handleNewPlayerInput}
+              handleRemovePlayerInput={handleRemovePlayerInput}
+              setNumPlayers={setNumPlayers}
+              numPlayers={numPlayers}
+            />
             <SelectInputs
               label="Category"
               apiData={response && response.trivia_categories}

@@ -17,10 +17,10 @@ const initState = {
   questionsAmount: 10,
   players: 1,
   intScore: 0,
-  allPlayerRecords: [{ name: "", score: 0 }],
+  allPlayerRecords: [],
 };
 const Reducer = (state = initState, action) => {
-  console.log(state.intScore)
+  console.log(state.allPlayerRecords)
   switch (action.type) {
     case CHANGE_CATEGORY:
       return {
@@ -60,7 +60,7 @@ const Reducer = (state = initState, action) => {
     case CHANGE_PLAYER:
       return {
         ...state,
-        player: action.payload,
+        allPlayerRecords: [...state.allPlayerRecords, action.newItem]
       }
     default:
       return state;
