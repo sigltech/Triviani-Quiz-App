@@ -6,7 +6,9 @@ import{ useNavigate } from 'react-router';
 import Countdown from 'react-countdown';
 import { LoadingPage, RenderQuestions } from '../../components/index.jsx';
 import { handleScoreChange } from '../../redux/action';
-import { render } from '@testing-library/react';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { store } from '../../redux/store';
+
 
 function GamePage() {
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -21,9 +23,11 @@ function GamePage() {
     questionsAmount,
     players,
     intScore,
-    player
+    player,
+    allPlayerRecords
   } = useSelector((state) => state);
-  
+
+
   let apiUrl = `api.php?amount=${questionsAmount}`;
   
   console.log(questionsAmount);
@@ -70,7 +74,27 @@ function GamePage() {
     }
   };
 
-  /* handle the selection of an answer and what to do if it is correct or wrong, as well as handling the finishing of the game */
+  
+ const saveData = async () => {
+    try {
+      await AsyncStorage.setItem('@save_score', intScore)
+      alert('Data successfully saved')
+    } catch (e) {
+      alert('Failed to save the data to the storage')
+    }
+  }
+
+  const getData = async () => {
+    try {
+      const storedDate = await AsyncStorage.getItem('@save_score')
+      console.log(storedDate)
+    }  catch (e) {
+      alert('Failed to get the data from the storage')
+    }
+  }
+
+
+  
   const handleAnswerSelect = (e) => {
     if (e.target.textContent === response.results[questionIndex].correct_answer && questionIndex < response.results.length -1) {
 
@@ -80,6 +104,7 @@ function GamePage() {
       setQuestionIndex(questionIndex + 1);
       // console.log(questionIndex, response.results.length);
     } else if (questionIndex >= response.results.length -1 ){
+        saveData();
         navigate('/finish')
     } else if (questionIndex < response.results.length -1) {
       setQuestionIndex(questionIndex + 1);
@@ -130,6 +155,8 @@ function GamePage() {
                 Test socket connection
               </button> */}
             </div>
+
+            <button onClick={getData}>get data test</button>
           </div>
           </div>
       </div>
