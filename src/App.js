@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import { OnlineGamePage, GameFinishPage, GamePage, IndexPage, LeaderboardPage, LocalGame } from './pages';
+import { OnlineGamePage, GameFinishPage, GamePage, IndexPage, LeaderboardPage, LocalGame, SocketExperiment } from './pages';
 import Layout from './Layouts';
 // import {decode} from 'html-entities';
 
@@ -15,9 +15,13 @@ import Layout from './Layouts';
 // // -> '&copy;'
 
 
+
 function App() {
+
   return (
     <div className="App">
+
+
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<IndexPage />} />
@@ -25,6 +29,7 @@ function App() {
           <Route path="/finish" element={<GameFinishPage />} />
           <Route path="/localgame" element={<LocalGame />} />
           <Route path="/game" element={<GamePage />} />
+          <Route path="/socket" element={<SocketExperiment />} />
           <Route path="/localgame" element={<LocalGame />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
         </Route>
