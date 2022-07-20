@@ -1,16 +1,22 @@
 import thunk from "redux-thunk";
 import { persistReducer, persistStore } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+// import storage from 'redux-persist/lib/storage';
 import Reducer from "./reducer";
-
-
 import { configureStore } from "@reduxjs/toolkit";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+ 
 
-
+// 'persist-key'
 const persistConfig = {
-  key: 'persist-key',
-  storage,
+  key: 'root',
+  storage: AsyncStorage,
+  whitelist:['username', 'intScore', 'player'],
+  blacklist: ['question_category',
+  'question_difficulty',
+  'question_type',
+  'questionsAmount',
+  'players']
 }
 
 const persistedReducer = persistReducer(persistConfig, Reducer)
