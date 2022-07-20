@@ -23,7 +23,8 @@ function GamePage() {
     questionsAmount,
     players,
     intScore,
-    player
+    player,
+    allPlayerRecords
   } = useSelector((state) => state);
 
 
