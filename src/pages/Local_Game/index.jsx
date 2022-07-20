@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { SelectInputs } from "../../components";
 import useAxios from "../../hooks/useAxios";
 import "./style.css";
-import { LoadingPage } from "../../components/index.jsx";
+import { LoadingPage, AddUsername } from "../../components/index.jsx";
+import { useSelector, useDispatch } from "react-redux";
+import { handlePlayersChange, handlePlayerChange } from '../../redux/action';
 
 const LocalGame = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [numPlayers, setNumPlayers] = useState();
 
+  const {players, Player} = useSelector((state) => state);
+  
   const { response, Loading, error } = useAxios({ url: "api_category.php" });
 
   if (Loading) {
     return <LoadingPage />;
   }
   if (error) {
-    return <h1>Put error component here</h1>;
+    return error;
   }
 
   const difficultyOpt = [
@@ -37,24 +43,62 @@ const LocalGame = () => {
     { id: 30, name: 30 },
   ];
 
-  const PlayerOpt = [
-    { id: 10, name: 1 },
-    { id: 12, name: 2 },
-    { id: 14, name: 3 },
-    { id: 16, name: 4 },
-  ];
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/game");
+    // dispatch(handlePlayersChange([...Player, {name: e.target.elements.username.value, score: 0}]));
+    return (
+      navigate("/game")
+    )
   };
+
+  console.log(`count number is: ${players}`)
+  console.log(`Player information: ${Player}`)
+
+  const handleNewPlayerInput = () => {
+    let counter = players;
+    const usernameDiv = document.querySelector("#addUsername");
+    const newPlayerInput = document.createElement("input");
+    newPlayerInput.setAttribute("type", "text");
+    newPlayerInput.setAttribute("placeholder", "Player Name");
+    newPlayerInput.setAttribute("key", counter);
+    newPlayerInput.setAttribute("required", "true");
+    newPlayerInput.setAttribute("label", counter);
+    let append = usernameDiv.appendChild(newPlayerInput);
+    dispatch(handlePlayersChange(players + 1));
+    return (
+      {append}
+    )
+  }
+
+  const handleRemovePlayerInput = () => {
+    const usernameDiv = document.querySelector("#addUsername");
+    const removePlayerInput = usernameDiv.querySelector("input");
+    console.log(removePlayerInput);
+    // usernameDiv.removeChild(usernameDiv.querySelector(":nth-last-child(2)"))
+    if(players <= 1 || usernameDiv.childNodes.length <= 1) {
+      alert("You must have at least one player")
+      dispatch(handlePlayersChange(players));
+    } else if(players >= 2) {
+      dispatch(handlePlayersChange(players - 1));
+      usernameDiv.removeChild(usernameDiv.removeChild(usernameDiv.querySelector(":nth-last-child(2)")))
+      console.log(`count number is: ${usernameDiv.childNodes}`)
+    }
+
+  }
 
   return (
     <div className="">
       <div className="Localgame-container">
         <div className="localgame-inputs-container">
-          <h1>Local Game</h1>
+          <div className="localgame-inputs-header">
+            <h1>Local Game</h1>
+            <div className="header-btns">
+            <button onClick={handleNewPlayerInput}>add Player</button>
+            <button onClick={handleRemovePlayerInput}>Remove Player</button>
+            </div>
+          </div>
           <form onSubmit={handleSubmit}>
+          <AddUsername handleNewPlayerInput={handleNewPlayerInput} handleRemovePlayerInput={handleRemovePlayerInput} setNumPlayers={setNumPlayers} numPlayers={numPlayers}/>
             <SelectInputs
               label="Category"
               apiData={response && response.trivia_categories}
@@ -62,8 +106,7 @@ const LocalGame = () => {
             <SelectInputs label="Difficulty" apiData={difficultyOpt} />
             <SelectInputs label="Game Type" apiData={typeOpt} />
             <SelectInputs label="Number Of Questions" apiData={numberOpt} />
-            <SelectInputs label="Number Of Players" apiData={PlayerOpt} />
-            <input type="text" id='username-input' />
+            {/* <SelectInputs label="Number Of Players" apiData={PlayerOpt} /> */}
             <input id="startgame-btn" type="submit" value="Start" />
           </form>
         </div>

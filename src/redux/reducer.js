@@ -15,9 +15,9 @@ const initState = {
   question_difficulty: "",
   question_type: "",
   questionsAmount: 10,
-  players: 0,
+  players: 1,
   intScore: 0,
-  player: [{ name: "", score: 0 }],
+  allPlayerRecords: [{ name: "", score: 0 }],
 };
 const Reducer = (state = initState, action) => {
   console.log(state.intScore)
