@@ -24,7 +24,6 @@ function GamePage() {
     players,
     intScore,
     player,
-    allPlayerRecords
   } = useSelector((state) => state);
 
 
