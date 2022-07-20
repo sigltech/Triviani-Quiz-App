@@ -2,6 +2,10 @@
   background: #622FCD;
 } */
 
+html {
+  min-height: 150vh;
+}
+
 .App {
   min-height: 120vh;
 }
@@ -12,7 +16,8 @@
   background: #774ec8;  
   background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);  
   width: 100%;
-  min-height:100vh;
+  height:160vh;
+  overflow: hidden;
   transition: background 1s ease-in-out;
 }
 
@@ -33,7 +38,7 @@
   width: 20px;
   height: 20px;
   background: rgba(255, 255, 255, 0.2);
-  animation: animate 25s linear infinite;
+  animation: animate 35s linear infinite;
   bottom: -150px;
   
 }
