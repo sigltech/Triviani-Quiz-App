@@ -1,5 +1,5 @@
 /* html {
-  background-color: #622FCD;
+  background: #622FCD;
 } */
 
 .motion-background{
@@ -9,8 +9,7 @@
   background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);  
   width: 100%;
   min-height:100vh;
-  
- 
+  transition: background 1s ease-in-out;
 }
 
 .moving-elements{
@@ -127,7 +126,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

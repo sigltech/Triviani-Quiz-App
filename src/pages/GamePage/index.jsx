@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useAxios from '../../hooks/useAxios';
 import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
@@ -23,6 +23,7 @@ function GamePage() {
     questionsAmount,
     players,
     intScore,
+    player
   } = useSelector((state) => state);
 
 
@@ -44,30 +45,17 @@ function GamePage() {
   if (loading) {
     return <LoadingPage />;
   }
-  console.log(response);
+
   console.log(
     question_category,
     question_difficulty,
     question_type,
     questionsAmount,
-    players
+    players,
+    player
   );
   console.log(questionIndex, response.results.length)
   console.log(response.results[questionIndex].question)
-
-  //   const [answers, setAnswers] = useState('');
-
-  //   async function getApi() {
-  //     try {
-  //       const result = await axios.get(
-  //         `https://opentdb.com/api.php?amount=10&category=20&difficulty=easy&type=multiple`
-  //       );
-  //       setAnswers(result.data);
-  //       console.log(result.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
 
   const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
@@ -107,10 +95,6 @@ function GamePage() {
 
   
   const handleAnswerSelect = (e) => {
-    // console.log(e.target.textContent);
-    // console.log(response.results[0].correct_answer);
-    // console.log(typeof response.results[0].correct_answer);
-    // console.log(typeof e.target.textContent);
     if (e.target.textContent === response.results[questionIndex].correct_answer && questionIndex < response.results.length -1) {
 
       console.log(`Correct answer is ${response.results[questionIndex].correct_answer}`);
@@ -124,26 +108,14 @@ function GamePage() {
     } else if (questionIndex < response.results.length -1) {
       setQuestionIndex(questionIndex + 1);
     }
-  };
-
-
-//   else if(response.results[questionIndex].length -1 === questionIndex){
-//     navigate('/finish')
-//     setQuestionIndex(0);
-//     console.log(questionIndex, response.results.length);
-    
-//   } else {
-//   setQuestionIndex(questionIndex + 1);
-// //   console.log(`That's is the wrong answer`);
-//   }
-
-  
+  };  
 
   return (
     <>
       <div className="gamePage">
         <div className="game-container">
           <div className="gamepage-container">
+
             <div className="countDown">
 
               <Countdown
@@ -160,6 +132,8 @@ function GamePage() {
 
             <div>
               <h1>{response.results[questionIndex].question}</h1>
+              {players}
+              <h3>Player <span id='playerNum'>{players.name}</span>'s turn</h3>
             </div>
 
             <div className="answers">

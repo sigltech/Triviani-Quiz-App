@@ -6,6 +6,7 @@ import {
   handleCategoryChange,
   handleDifficultyChange,
   handleTypeChange,
+  handlePlayersChange,
 } from '../../redux/action';
 
 const SelectInputs = ({ label, apiData }) => {
@@ -14,6 +15,7 @@ const SelectInputs = ({ label, apiData }) => {
 
   const handleChange = (e) => {
     setValue(e.target.value);
+    console.log(e.target.value);
     switch (label) {
       case 'Category':
         dispatch(handleCategoryChange(e.target.value));
@@ -30,7 +32,6 @@ const SelectInputs = ({ label, apiData }) => {
       case 'Number Of Questions':
         dispatch(handleAmountChange(e.target.value));
         break;
-
       default:
         return;
     }
