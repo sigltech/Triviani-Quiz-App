@@ -34,7 +34,7 @@ function GameFinishPage() {
 
             <div className="leadership chart">
                 <LeaderBoardChart />
-
+                <LeaderBoardList />
             </div>
 
             <button className="reset-btn" onClick={() => navigate('/localgame')}> PLAY AGAIN? </button>

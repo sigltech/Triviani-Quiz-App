@@ -57,7 +57,7 @@
   }
   
   .reset-btn:hover {
-    background-color: rgba(255, 255, 255, 0);
+    background: rgba(255, 255, 255, 0);
     color: #fff;
     border: 3px solid rgb(255, 255, 255);
   }
@@ -89,7 +89,7 @@
   }
   
   .home-btn:hover {
-    background-color: rgba(255, 255, 255, 0);
+    background: rgba(255, 255, 255, 0);
     color: #fff;
     border: 3px solid rgb(255, 255, 255);
   }

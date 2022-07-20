@@ -1,5 +1,5 @@
 /* html {
-  background-color: #622FCD;
+  background: #622FCD;
 } */
 
 .motion-background{
@@ -127,7 +127,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
