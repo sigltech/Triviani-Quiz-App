@@ -1,12 +1,32 @@
-import { legacy_createStore as createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+import { persistReducer, persistStore } from 'redux-persist';
+// import storage from 'redux-persist/lib/storage';
 import Reducer from "./reducer";
-import logger from "redux-logger";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { configureStore } from "@reduxjs/toolkit";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const store = createStore(
-  Reducer,
-  composeWithDevTools(applyMiddleware(logger, thunk))
-);
+ 
 
-export default store;
+// 'persist-key'
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+  whitelist:['username', 'intScore', 'player'],
+  blacklist: ['question_category',
+  'question_difficulty',
+  'question_type',
+  'questionsAmount',
+  'players']
+}
+
+const persistedReducer = persistReducer(persistConfig, Reducer)
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  devTools: process.env.NODE_ENV !== 'production',
+  middleware: [thunk]
+})
+
+
+
+export const persistor = persistStore(store)

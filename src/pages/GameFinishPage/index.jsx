@@ -14,6 +14,7 @@ function GameFinishPage() {
         questionsAmount,
         players,
         intScore,
+        player
       } = useSelector((state) => state);
 
     return(
@@ -28,13 +29,12 @@ function GameFinishPage() {
             </div>
  
             <div className="scores">
-                <p> Player 1 score: <span>{intScore}</span></p>
-                <p> Player 2 score ...</p>
+                <p> {player[1].name}'s score: <span>{player[1].score}</span></p>
             </div>
 
             <div className="leadership chart">
                 <LeaderBoardChart />
-
+                <LeaderBoardList />
             </div>
 
             <button className="reset-btn" onClick={() => navigate('/localgame')}> PLAY AGAIN? </button>

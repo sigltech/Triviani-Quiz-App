@@ -19,6 +19,7 @@ const IndexPage = () => {
           <div></div>
           <button onClick={() => navigate('/localgame')}>Local Game</button>
           <button onClick={() => navigate('/onlinegame')}>Online Game</button>
+          <button onClick={() => navigate('/socket')}>message friend</button>
         </div>
       </div>
 

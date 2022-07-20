@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .scores,
@@ -31,7 +31,7 @@
 }
 
 .reset-btn {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     left: 20px;
     z-index: 1;
@@ -57,13 +57,13 @@
   }
   
   .reset-btn:hover {
-    background-color: rgba(255, 255, 255, 0);
+    background: rgba(255, 255, 255, 0);
     color: #fff;
     border: 3px solid rgb(255, 255, 255);
   }
 
 .home-btn {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     right: 20px;
     z-index: 1;
@@ -89,7 +89,7 @@
   }
   
   .home-btn:hover {
-    background-color: rgba(255, 255, 255, 0);
+    background: rgba(255, 255, 255, 0);
     color: #fff;
     border: 3px solid rgb(255, 255, 255);
   }
