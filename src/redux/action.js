@@ -11,6 +11,9 @@ import {
   CHANGE_USERNAME,
   CHANGE_PLAYERS,
   CHANGE_PLAYER,
+  CHANGE_ONLINE_PLAYER,
+  CHANGE_ONLINE_USERNAME,
+  CHANGE_ONLINE_ROOM
 } from "./actionTypes";
 
 export const handleCategoryChange = (payload) => ({
@@ -43,6 +46,11 @@ export const handleUsernameChange = (payload) => ({
   payload,
 });
 
+export const handleOnlineUsernameChange = (payload) => ({
+  type: CHANGE_ONLINE_USERNAME,
+  payload,
+});
+
 export const handlePlayersChange = (payload) => ({
   type: CHANGE_PLAYERS,
   payload,
@@ -50,6 +58,16 @@ export const handlePlayersChange = (payload) => ({
 
 export const handlePlayerChange = (payload) => ({
   type: CHANGE_PLAYER,
+  payload,
+});
+
+export const handleOnlinePlayerChange = (payload) => ({
+  type: CHANGE_ONLINE_PLAYER,
+  payload,
+});
+
+export const handleOnlineRoomChange = (payload) => ({
+  type: CHANGE_ONLINE_ROOM,
   payload,
 });
 
