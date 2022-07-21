@@ -38,7 +38,7 @@ function GamePage() {
   if (question_type) {
     apiUrl = apiUrl.concat(`&type=${question_type}`);
   }
-  console.log(apiUrl);
+  console.log(allPlayerRecords, `43 gp`);
   const { response, error, loading } = useAxios({ url: apiUrl });
 
   if (loading) {
