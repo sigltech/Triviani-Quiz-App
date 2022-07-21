@@ -5,22 +5,28 @@ import {
   CHANGE_SCORE,
   CHANGE_TYPE,
   CHANGE_USERNAME,
+  CHANGE_ONLINE_USERNAME,
   CHANGE_PLAYERS,
-  CHANGE_PLAYER
+  CHANGE_PLAYER,
+  CHANGE_ONLINE_PLAYER,
+  CHANGE_ONLINE_ROOM
 } from "./actionTypes";
 
 const initState = {
   username: "",
+  online_username: "",
   question_category: "",
   question_difficulty: "",
   question_type: "",
   questionsAmount: 10,
   players: 1,
   intScore: 0,
-  allPlayerRecords: [],
+  player: [],
+  online_player: [],
+  online_room: "",
 };
 const Reducer = (state = initState, action) => {
-  console.log(state.allPlayerRecords)
+
   switch (action.type) {
     case CHANGE_CATEGORY:
       return {
@@ -61,6 +67,21 @@ const Reducer = (state = initState, action) => {
       return {
         ...state,
         allPlayerRecords: [...state.allPlayerRecords, action.newItem]
+      }
+    case CHANGE_ONLINE_PLAYER:
+      return {
+        ...state,
+        online_player: action.payload,
+      }
+    case CHANGE_ONLINE_USERNAME:
+      return {
+        ...state,
+        online_username: action.payload,
+      }
+    case CHANGE_ONLINE_ROOM:
+      return {
+        ...state,
+        online_room: action.payload,
       }
     default:
       return state;

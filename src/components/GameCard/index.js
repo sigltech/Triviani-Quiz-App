@@ -1,14 +1,11 @@
-import React from 'react';
+import React from "react";
 
-function gameCard( { question,  answer }) {
+function gameCard({ question, answer }) {
+  return (
+    <div>
+      <h1 role="header"> gameCard</h1>
+    </div>
+  );
+}
 
-    return(
-
-        <div>
-
-            <h1> gameCard</h1>
-        </div>
-
-    ) };
-
-    export default gameCard;
+export default gameCard;

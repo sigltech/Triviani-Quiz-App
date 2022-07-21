@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const loadRecipes = createAsyncThunk(
-  "allRecipes/getAllRecipes",
+export const loadPlayers = createAsyncThunk(
+  "allplayers",
   async () => {
-    const data = await fetch("api/recipes?limit=10");
+    const data = await fetch("http://localhost:1234/players");
     const json = await data.json();
     return json;
   }
