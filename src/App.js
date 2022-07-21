@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import { OnlineGamePage, GameFinishPage, GamePage, IndexPage, LeaderboardPage, LocalGame, SocketExperiment, OnlineGame } from './pages';
+import { OnlineGamePage, GameFinishPage, GamePage, IndexPage, LeaderboardPage, LocalGame, SocketExperiment, HowToPlay,OnlineGame } from './pages';
 import Layout from './Layouts';
 // import {decode} from 'html-entities';
 
@@ -31,6 +31,7 @@ function App() {
           <Route path="/finish" element={<GameFinishPage />} />
           <Route path="/localgame" element={<LocalGame />} />
           <Route path="/game" element={<GamePage />} />
+          <Route path="/how_to_play" element={<HowToPlay />} />
           <Route path="/socket" element={<SocketExperiment />} />
           <Route path="/localgame" element={<LocalGame />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
