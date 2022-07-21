@@ -55,12 +55,12 @@ const LocalGame = () => {
     const newPlayerInput = document.createElement("input");
     newPlayerInput.setAttribute("type", "text");
     newPlayerInput.setAttribute("id", `player${counter + 1}`);
-    // newPlayerInput.addEventListener("change", handleInputChange);
     newPlayerInput.setAttribute("placeholder", "Player Name");
-    newPlayerInput.setAttribute("key", counter);
+    newPlayerInput.setAttribute("key", counter+1);
     newPlayerInput.setAttribute("required", "true");
     newPlayerInput.setAttribute("label", counter);
     let append = usernameDiv.appendChild(newPlayerInput);
+    newPlayerInput.addEventListener("change", handleInputChange);
     dispatch(handlePlayersChange(players + 1));
     return (
       {append}
@@ -77,18 +77,26 @@ const LocalGame = () => {
       dispatch(handlePlayersChange(players));
     } else if(players >= 2) {
       dispatch(handlePlayersChange(players - 1));
-      usernameDiv.removeChild(usernameDiv.removeChild(usernameDiv.querySelector(":nth-last-child(2)")))
+
+      if(usernameDiv.lastChild === HTMLSpanElement) {
+        usernameDiv.removeChild(usernameDiv.removeChild(usernameDiv.querySelector(":nth-last-child(2)")))
+      } else {
+      usernameDiv.removeChild(usernameDiv.lastChild);
       console.log(`count number is: ${usernameDiv.childNodes}`)
+      }
     }
 
   }
 
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e) => { 
+    if(e.target.value !== undefined) {
     let target = e.target.value;
     console.log(target)
     setInputValue({name: `${target}`, score: 0});
-    console.log(`input value is: ${JSON.stringify(inputValue)}`)
+    dispatch(handleUsernameChange(target));
+      console.log(`input value is: ${JSON.stringify(inputValue)}`)
+    }
   }
 
   const handleSubmit = (e) => {
@@ -103,8 +111,6 @@ const LocalGame = () => {
       navigate("/game")
       )
     };
-
-
 
   return (
     <div className="">

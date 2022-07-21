@@ -2,21 +2,19 @@ import React, {useEffect, useState} from "react";
 import './style.css'
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { WaitingRoom } from "../../components";
 
 import { handleOnlineUsernameChange, handleOnlineRoomChange } from "../../redux/action";
 import { io } from 'socket.io-client';
 const socket = io.connect('http://localhost:8000');
 
 export default function OnlineGamePage() {
-    const [waitingForPlayer, setWaitingForPlayer] = useState(false);
     const [room, setRoom] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {
         online_username,
-        online_player
-    
+        online_player,
+        player,    
       } = useSelector((state) => state);
 
     const randomRoomNumber = () => {
@@ -37,22 +35,26 @@ export default function OnlineGamePage() {
 
     const handleOnlineSubmit = (e) => {
         e.preventDefault();
-        const target = document.getElementById('socket-roomNumber');
-        const roomNumber = target.textContent;
+        const target = document.getElementById('room-number');
+        const roomNumber = target.value;
         setRoom(roomNumber);
         const onlineUser = document.getElementById('username');
         console.log(onlineUser.value)
         dispatch(handleOnlineUsernameChange(onlineUser.value));
         console.log(roomNumber);
+
+        // join room with socket.emit
         socket.emit('join_room', roomNumber);
-        setWaitingForPlayer(!waitingForPlayer);
+        navigate(`/onlinegame/waitingroom`);
     }
 
-    useEffect(() => {
-        socket.on('join_room', (data) => {
-            console.log(data);
-        });
-    })
+    // useEffect(() => {
+    //     socket.emit('join_room', player);
+    //     socket.on('message', (data) => {
+    //       console.log(data);
+    //     }
+    //     );
+    // },[])
 
     return (
         <>
@@ -60,7 +62,6 @@ export default function OnlineGamePage() {
 
                 <div className="form-container">
                     <div className="create-game-container">
-                        {waitingForPlayer ? <WaitingRoom room={room} /> : 
                         <>
                             <div className="create-game-button">
                                 <button onClick={randomRoomNumber}>Create Game</button>
@@ -74,7 +75,6 @@ export default function OnlineGamePage() {
                             <button type="submit">Join game</button>
                         </form>
                         </>
-                        }
                     </div>
                 </div>
             {/* <div className="Online-game-start-container">
