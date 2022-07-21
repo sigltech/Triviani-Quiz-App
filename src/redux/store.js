@@ -11,7 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist:['username', 'intScore', 'player'],
+  whitelist:['username', 'intScore', 'player', 'online_player','online_username', 'online_room'],
   blacklist: ['question_category',
   'question_difficulty',
   'question_type',

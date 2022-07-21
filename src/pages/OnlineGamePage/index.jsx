@@ -1,7 +1,58 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './style.css'
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { WaitingRoom } from "../../components";
+
+import { handleOnlineUsernameChange, handleOnlineRoomChange } from "../../redux/action";
+import { io } from 'socket.io-client';
+const socket = io.connect('http://localhost:8000');
 
 export default function OnlineGamePage() {
+    const [waitingForPlayer, setWaitingForPlayer] = useState(false);
+    const [room, setRoom] = useState('');
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {
+        online_username,
+        online_player
+    
+      } = useSelector((state) => state);
+
+    const randomRoomNumber = () => {
+        const randomNum = Math.floor(Math.random() * 1000);
+        const target = document.getElementById('socket-roomNumber');
+        target.textContent = randomNum;
+        dispatch(handleOnlineRoomChange(target.textContent));
+        console.log(target.textContent)
+    }
+
+    const copytoClipboard = (e) => {
+        console.log(e.target.textContent)
+        navigator.clipboard.writeText(e.target.textContent)
+        .then(() => {
+            alert('Copied to clipboard');
+        })
+    }
+
+    const handleOnlineSubmit = (e) => {
+        e.preventDefault();
+        const target = document.getElementById('socket-roomNumber');
+        const roomNumber = target.textContent;
+        setRoom(roomNumber);
+        const onlineUser = document.getElementById('username');
+        console.log(onlineUser.value)
+        dispatch(handleOnlineUsernameChange(onlineUser.value));
+        console.log(roomNumber);
+        socket.emit('join_room', roomNumber);
+        setWaitingForPlayer(!waitingForPlayer);
+    }
+
+    useEffect(() => {
+        socket.on('join_room', (data) => {
+            console.log(data);
+        });
+    })
 
     return (
         <>
@@ -9,18 +60,23 @@ export default function OnlineGamePage() {
 
                 <div className="form-container">
                     <div className="create-game-container">
-                    <div className="create-game-button">
-                        <button>Create Game</button>
+                        {waitingForPlayer ? <WaitingRoom room={room} /> : 
+                        <>
+                            <div className="create-game-button">
+                                <button onClick={randomRoomNumber}>Create Game</button>
+                                <h2 onClick={copytoClipboard} id="socket-roomNumber"> </h2>
+                            </div>
+                        <form onSubmit={handleOnlineSubmit} className="join-game-container">
+                            <label htmlFor="room-number">Type in Room number</label>
+                            <input type="number" name="room-number" id="room-number" />
+                            <label htmlFor="username">Type in your username</label>
+                            <input type="text" name="username" id="username" />
+                            <button type="submit">Join game</button>
+                        </form>
+                        </>
+                        }
                     </div>
-                    <form className="join-game-container">
-                        <label htmlFor="room-number">Type in Room number</label>
-                        <input type="number" name="room-number" id="room-number" />
-                        <label htmlFor="username">Type in your username</label>
-                        <input type="number" name="username" id="username" />
-                        <button type="submit">Join game</button>
-                    </form>
                 </div>
-            </div>
             {/* <div className="Online-game-start-container">
                 <form className="flex-col-center">
                     <label htmlFor="">Number Of Players</label>
