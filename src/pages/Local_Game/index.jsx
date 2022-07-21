@@ -5,17 +5,17 @@ import useAxios from "../../hooks/useAxios";
 import "./style.css";
 import { LoadingPage, AddUsername } from "../../components/index.jsx";
 import { useSelector, useDispatch } from "react-redux";
-import { handlePlayersChange, handlePlayerChange } from '../../redux/action';
+import { handlePlayersChange, handlePlayerChange, handleUsernameChange } from '../../redux/action';
 
 const LocalGame = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [numPlayers, setNumPlayers] = useState();
   const [user, setUser] = useState([{name: "", score: 0}]);
-  const [inputValue, setInputValue] = useState("");
-  const [submitValue, setSubmitValue] = useState("");
+  const [inputValue, setInputValue] = useState([{name: "", score: 0}]);
+  const [submitValue, setSubmitValue] = useState([{name: "", score: 0}]);
 
-  const {players, player} = useSelector((state) => state);
+  const {players, player, username} = useSelector((state) => state);
   
   const { response, Loading, error } = useAxios({ url: "api_category.php" });
 
@@ -54,6 +54,8 @@ const LocalGame = () => {
     const usernameDiv = document.querySelector("#addUsername");
     const newPlayerInput = document.createElement("input");
     newPlayerInput.setAttribute("type", "text");
+    newPlayerInput.setAttribute("id", `player${counter + 1}`);
+    // newPlayerInput.addEventListener("change", handleInputChange);
     newPlayerInput.setAttribute("placeholder", "Player Name");
     newPlayerInput.setAttribute("key", counter);
     newPlayerInput.setAttribute("required", "true");
@@ -81,18 +83,26 @@ const LocalGame = () => {
 
   }
 
+
+  const handleInputChange = (e) => {
+    let target = e.target.value;
+    console.log(target)
+    setInputValue({name: `${target}`, score: 0});
+    console.log(`input value is: ${JSON.stringify(inputValue)}`)
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitValue(inputValue);
+    setSubmitValue(inputValue.name);
     console.log(submitValue)
-    dispatch(handlePlayerChange([...player, {name: inputValue, score: 0}]));
-    // dispatch(handlePlayersChange([...Player, {name: e.target.elements.username.value, score: 0}]));
+    // dispatch(handlePlayerChange([...player, inputValue]));
+    // console.log(`Player information: ${JSON.stringify(player)}`)
+    dispatch(handleUsernameChange(inputValue.name));
+    console.log(`Player information: ${JSON.stringify(username)}`)
     return (
       navigate("/game")
       )
     };
-    console.log(user)
-    console.log(submitValue)
 
 
 
@@ -107,7 +117,7 @@ const LocalGame = () => {
             <button onClick={handleRemovePlayerInput}>Remove Player</button>
             </div>
           </div>
-          <AddUsername user={user} setUser={setUser} inputValue={inputValue} setInputValue={setInputValue}/>
+          <AddUsername user={user} setUser={setUser} handleInputChange={handleInputChange}/>
           <form onSubmit={handleSubmit}>
             <SelectInputs
               label="Category"

@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useAxios from '../../hooks/useAxios';
 import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
 import{ useNavigate } from 'react-router';
 import Countdown from 'react-countdown';
 import { LoadingPage, RenderQuestions } from '../../components/index.jsx';
-import { handleScoreChange } from '../../redux/action';
+import { handlePlayerChange, handleScoreChange } from '../../redux/action';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { store } from '../../redux/store';
+
 
 
 function GamePage() {
@@ -17,6 +18,7 @@ function GamePage() {
   const dispatch = useDispatch();
   
   const {
+    username,
     question_category,
     question_difficulty,
     question_type,
@@ -52,7 +54,8 @@ function GamePage() {
     question_type,
     questionsAmount,
     players,
-    player
+    player,
+    username,
   );
   console.log(questionIndex, response.results.length)
   console.log(response.results[questionIndex].question)
@@ -104,11 +107,14 @@ function GamePage() {
       // console.log(questionIndex, response.results.length);
     } else if (questionIndex >= response.results.length -1 ){
         saveData();
+        dispatch(handlePlayerChange([...player, {name: username, score: intScore}]));
+        console.log(player);
+        dispatch(handleScoreChange(0));
         navigate('/finish')
     } else if (questionIndex < response.results.length -1) {
       setQuestionIndex(questionIndex + 1);
     }
-  };  
+  }; 
 
   return (
     <>
@@ -132,7 +138,7 @@ function GamePage() {
 
             <div>
               <h1>{response.results[questionIndex].question}</h1>
-              <h3><span id='playerNum'>{player[1].name}</span>'s turn</h3>
+              <h3><span id='playerNum'>{username}</span>'s turn</h3>
             </div>
 
             <div className="answers">
