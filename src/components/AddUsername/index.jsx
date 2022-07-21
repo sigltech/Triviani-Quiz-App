@@ -2,14 +2,9 @@ import React, {useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { handlePlayerChange } from "../../redux/action";
 
-export default function AddUsername({user, setUser, inputValue, setInputValue}) {
+export default function AddUsername({user, setUser, handleInputChange }) {
 
 
-
-
-    const handleInputChange = (e) => {
-        setInputValue(e.target.value);
-    }
 
   return (
     <div id="addUsername" className="addUsername">

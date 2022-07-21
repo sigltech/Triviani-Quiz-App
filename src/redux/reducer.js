@@ -17,10 +17,10 @@ const initState = {
   questionsAmount: 10,
   players: 1,
   intScore: 0,
-  player: [{name: "", score: 0}],
+  player: [],
 };
 const Reducer = (state = initState, action) => {
-  console.log(state.player)
+
   switch (action.type) {
     case CHANGE_CATEGORY:
       return {

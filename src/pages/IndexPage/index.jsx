@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
+import axios from 'axios';
 
 const IndexPage = () => {
   const navigate = useNavigate();
@@ -10,6 +11,15 @@ const IndexPage = () => {
     console.log('submit');
     navigate('/game');
   };
+
+  useEffect( () => {
+    async function getData() {
+      let serverApi = 'http://localhost:1234';
+      await axios.get(serverApi)
+      .then(res => console.log(res.data))
+    }
+    getData();
+  }, [])
 
   return (
     <>
