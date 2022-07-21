@@ -6,7 +6,7 @@ import {
   handleCategoryChange,
   handleDifficultyChange,
   handleTypeChange,
-  handlePlayersChange,
+  // handlePlayersChange,
 } from '../../redux/action';
 
 const SelectInputs = ({ label, apiData }) => {
