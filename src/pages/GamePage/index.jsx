@@ -5,11 +5,7 @@ import './style.css';
 import { useNavigate } from 'react-router';
 import Countdown from 'react-countdown';
 import { LoadingPage, RenderQuestions } from '../../components/index.jsx';
-<<<<<<< HEAD
-import { handleScoreChange } from '../../redux/action';
-=======
 import { handlePlayerChange, handleScoreChange } from '../../redux/action';
->>>>>>> 2c92e2ee72a39bb5524b7a4c8e2f2ece60155a88
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { store } from '../../redux/store';
 
@@ -28,10 +24,6 @@ function GamePage() {
     players,
     intScore,
     player,
-<<<<<<< HEAD
-    allPlayerRecords,
-=======
->>>>>>> 2c92e2ee72a39bb5524b7a4c8e2f2ece60155a88
   } = useSelector((state) => state);
 
   let apiUrl = `api.php?amount=${questionsAmount}`;
@@ -59,12 +51,8 @@ function GamePage() {
     question_type,
     questionsAmount,
     players,
-<<<<<<< HEAD
-    allPlayerRecords
-=======
     player,
     username
->>>>>>> 2c92e2ee72a39bb5524b7a4c8e2f2ece60155a88
   );
   console.log(questionIndex, response.results.length);
   console.log(response.results[questionIndex].question);
@@ -104,15 +92,8 @@ function GamePage() {
   };
 
   const handleAnswerSelect = (e) => {
-<<<<<<< HEAD
-    console.log(`e.tar.tex`, e.target.id);
-    console.log(`r.r.[].c_a`, response.results[questionIndex].correct_answer);
-    if (
-      e.target.id === 'correct' &&
-=======
     if (
       e.target.textContent === response.results[questionIndex].correct_answer &&
->>>>>>> 2c92e2ee72a39bb5524b7a4c8e2f2ece60155a88
       questionIndex < response.results.length - 1
     ) {
       console.log(
@@ -124,14 +105,11 @@ function GamePage() {
       // console.log(questionIndex, response.results.length);
     } else if (questionIndex >= response.results.length - 1) {
       saveData();
-<<<<<<< HEAD
-=======
       dispatch(
         handlePlayerChange([...player, { name: username, score: intScore }])
       );
       console.log(player);
       dispatch(handleScoreChange(0));
->>>>>>> 2c92e2ee72a39bb5524b7a4c8e2f2ece60155a88
       navigate('/finish');
     } else if (questionIndex < response.results.length - 1) {
       setQuestionIndex(questionIndex + 1);
@@ -161,14 +139,8 @@ function GamePage() {
 
             <div>
               <h1>{response.results[questionIndex].question}</h1>
-<<<<<<< HEAD
-              {players}
-              <h3>
-                Player <span id="playerNum">{players.name}</span>'s turn
-=======
               <h3>
                 <span id="playerNum">{username}</span>'s turn
->>>>>>> 2c92e2ee72a39bb5524b7a4c8e2f2ece60155a88
               </h3>
             </div>
 

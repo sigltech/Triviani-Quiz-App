@@ -1,29 +1,3 @@
-<<<<<<< HEAD
-const RenderQuestions = ({ response, questionIndex, handleAnswerSelect }) => {
-  return (
-    <>
-      {response.results[questionIndex].incorrect_answers.map(
-        (answer, index) => {
-          return (
-            <div
-              type="button"
-              onClick={handleAnswerSelect}
-              className="answerCard"
-              key={index}
-              dangerouslySetInnerHTML={{ __html: answer }}
-            ></div>
-          );
-        }
-      )}
-
-      <div onClick={handleAnswerSelect} id="correct" className="answerCard">
-        {response.results[questionIndex].correct_answer}
-      </div>
-    </>
-  );
-};
-
-=======
 import { useEffect, useState } from 'react';
 
 const getRandomInt = (max) => {
@@ -77,5 +51,4 @@ const RenderQuestions = ({ response, questionIndex, handleAnswerSelect }) => {
   );
 };
 
->>>>>>> 2c92e2ee72a39bb5524b7a4c8e2f2ece60155a88
 export default RenderQuestions;
