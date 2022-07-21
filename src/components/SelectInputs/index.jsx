@@ -51,7 +51,8 @@ const SelectInputs = ({ label, apiData }) => {
         <option disabled className="" value="">
           {label}
         </option>
-        {apiData && apiData.map(({ id, name }) => (
+        {apiData &&
+          apiData.map(({ id, name }) => (
             <option value={id} key={id}>
               {name}
             </option>
