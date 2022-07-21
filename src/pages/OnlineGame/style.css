@@ -1,0 +1,46 @@
+.gamePage {
+    width: 100vw;
+}
+
+.game-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.gamepage-container {
+    max-width: 500px;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.5);
+    padding: 4rem;
+}
+
+.gamepage-container button {
+    color: black;
+    padding: 0.4rem 1rem;
+}
+
+.gamepage-container .countDown,
+.gamepage-container .answers {
+    margin: 1rem;
+} 
+
+.answers {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.answers .answerCard {
+    border:2px solid rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+    margin: 1rem;
+}

@@ -23,7 +23,7 @@ const SocketExperiment = () => {
   useEffect(() => {
     socket.on('receive_message', (data) => {
       console.log(data);
-      setMessageReceived(data.message);
+      setMessageReceived([...messageReceived, data.message]);
     });
   }, [socket]);
 
