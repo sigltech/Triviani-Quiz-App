@@ -1,8 +1,21 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "./App";
+import { BrowserRouter as Router } from "react-router-dom";
+import * as router from "react-router";
+import { Provider } from "react-redux";
+import store from "./store";
+import "@testing-library/jest-dom";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("Index", () => {
+  test("renders learn react link", () => {
+    render(
+      <Provider store={store}>
+        <Router>
+          <App />
+        </Router>
+      </Provider>
+    );
+    const heading = screen.getByText(/Welcome to the Trivia Game/i);
+    expect(heading).toBeInTheDocument();
+  });
 });
