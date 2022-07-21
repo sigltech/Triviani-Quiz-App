@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LeaderBoardChart, LeaderBoardList } from "../../components";
 import './style.css';
 import { useSelector } from 'react-redux';
+import axios from 'axios'; // Import axios
 
 function GameFinishPage() {
     const navigate = useNavigate();
@@ -17,6 +18,25 @@ function GameFinishPage() {
         player
       } = useSelector((state) => state);
 
+      console.log(player)
+
+      useEffect(() => {
+      function pushToBackend(player) {
+        const url = 'http://localhost:1234/data';
+        const data = player;
+        const options = {
+          method: 'POST',
+          headers: {
+            'accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }
+        axios.post(url, data, options)
+        }
+
+        pushToBackend(player)
+      },[]);
+
     return(
         <div className="gameFinish">
 
@@ -29,7 +49,7 @@ function GameFinishPage() {
             </div>
  
             <div className="scores">
-                <p> {player[1].name}'s score: <span>{player[1].score}</span></p>
+                <p> {player[0].name}'s score: <span>{player[0].score}</span></p>
             </div>
 
             <div className="leadership chart">

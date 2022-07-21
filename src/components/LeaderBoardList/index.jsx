@@ -25,16 +25,12 @@ export default function LeaderBoardList() {
                             let counter = 0;
                             return (
                                 <tr key={index}>
-                                    <td>{counter + 1}</td>
+                                    <td>{counter += 1}</td>
                                     <td >{player.name}</td>
                                     <td>{player.score}</td>
                                 </tr>
                             )
                         })}
-                        {/* <td>1</td>
-                        <td>{player[1].name}</td>
-                        <td>{player[1].score}</td>
-                    </tr> */}
                 </tbody>
             </table>
         </div>
