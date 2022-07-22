@@ -21,13 +21,13 @@ describe('How to play page', () => {
     );
   });
 
-  test('displays correct text value on button', () => {
-    const button = screen.getByRole('button');
-    expect(button).toBeInTheDocument();
-  });
+  // test('displays correct text value on button', () => {
+  //   const button = screen.getByRole('button');
+  //   expect(button).toBeInTheDocument();
+  // });
 
-  test('Displays the passed text', () => {
-    const button = screen.getByRole('button');
-    expect(button.textContent).toBe('Understood!');
-  });
+  // test('Displays the passed text', () => {
+  //   const button = screen.getByRole('button');
+  //   expect(button.textContent).toBe('Understood!');
+  // });
 });
