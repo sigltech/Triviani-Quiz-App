@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useAxios from '../../hooks/useAxios';
 import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
 import{ useNavigate } from 'react-router';
-import Countdown from 'react-countdown';
-import { LoadingPage, RenderQuestions } from '../../components/index.jsx';
+import { LoadingPage, OnlineGameComp } from '../../components/';
 import { handlePlayerChange, handleScoreChange } from '../../redux/action';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { store } from '../../redux/store';
-
+import { io } from 'socket.io-client';
+const socket = io.connect('http://localhost:8000');
 
 
 function OnlineGame() {
+
   const [questionIndex, setQuestionIndex] = useState(0);
   const [timer, setTimer] = useState(11000);
+  const [waitingForPlayer, setWaitingForPlayer] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const {
     username,
     question_category,
@@ -26,6 +28,7 @@ function OnlineGame() {
     players,
     intScore,
     player,
+    online_room
   } = useSelector((state) => state);
 
 
@@ -42,6 +45,7 @@ function OnlineGame() {
     apiUrl = apiUrl.concat(`&type=${question_type}`);
   }
   console.log(apiUrl);
+
   const { response, error, loading } = useAxios({ url: apiUrl });
   
   if (loading) {
@@ -96,6 +100,8 @@ function OnlineGame() {
   }
 
 
+
+
   
   const handleAnswerSelect = (e) => {
     if (e.target.textContent === response.results[questionIndex].correct_answer && questionIndex < response.results.length -1) {
@@ -116,54 +122,26 @@ function OnlineGame() {
     }
   }; 
 
+  const startSubmit = (e) => {
+    e.preventDefault();
+    setWaitingForPlayer(!waitingForPlayer);
+  }
+
   return (
     <>
-      <div className="gamePage">
-        <div className="game-container">
-          <div className="gamepage-container">
-
-            <div className="countDown">
-
-              <Countdown
-                intervalDelay={1000}
-                precision={3}
-                date={Date.now() + timer} 
-                renderer={renderer}
-                key={questionIndex}
-                autoStart={true}
-                onComplete={() => {questionIndex === response.results.length -2 ? navigate('/finish') : setQuestionIndex(questionIndex + 1)}}
-              />
-
-            </div>
-
-            <div>
-              <h1>{response.results[questionIndex].question}</h1>
-              <h3><span id='playerNum'>{username}</span>'s turn</h3>
-            </div>
-
-            <div className="answers">
-              <RenderQuestions  response={response} questionIndex={questionIndex} handleAnswerSelect={handleAnswerSelect}/>
-            </div>
-
-            <div>
-              <h3>
-                {' '}
-                Score: {intScore} / {response.results.length}
-              </h3>
-              {/* <button
-                style={{ color: "#000" }}
-                onClick={() => {
-                  console.log("clicked");
-                }}
-              >
-                Test socket connection
-              </button> */}
-            </div>
-
-            <button onClick={getData}>get data test</button>
-          </div>
-          </div>
-      </div>
+      <OnlineGameComp 
+          getData={getData} 
+          startSubmit={startSubmit}
+          waitingForPlayer={waitingForPlayer}
+          setWaitingForPlayer={setWaitingForPlayer}
+          questionIndex={questionIndex}
+          setQuestionIndex={setQuestionIndex}
+          timer={timer}
+          setTimer={setTimer}
+          renderer={renderer}
+          response={response}
+          handleAnswerSelect={handleAnswerSelect}
+          />
     </>
   );
 }

@@ -25,10 +25,10 @@ const IndexPage = () => {
       <div className="index-container">
         <div className="homepage-container">
           <h1>Welcome to the Trivia Game</h1>
-          <div></div>
+          <div></div> 
           <button onClick={() => navigate('/localgame')}>Local Game</button>
           <button onClick={() => navigate('/onlinegame')}>Online Game</button>
-          <button onClick={() => navigate('/socket')}>message friend</button>
+          {/* <button onClick={() => navigate('/socket')}>message friend</button> */}
           <button onClick={() => navigate('/how_to_play')}>How To Play</button>
         </div>
       </div>

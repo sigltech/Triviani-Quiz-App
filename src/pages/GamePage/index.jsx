@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useAxios from '../../hooks/useAxios';
 import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
 import { useNavigate } from 'react-router';
 import Countdown from 'react-countdown';
 import { LoadingPage, RenderQuestions } from '../../components/index.jsx';
-import { handlePlayerChange, handleScoreChange } from '../../redux/action';
+import {
+  handleLocalPlayersChange,
+  handlePlayerChange,
+  handleScoreChange,
+} from '../../redux/action';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { store } from '../../redux/store';
+import { decode } from 'html-entities';
 
 function GamePage() {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [timer, setTimer] = useState(11000);
+  const [playerIndex, setPlayerIndex] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,6 +30,7 @@ function GamePage() {
     players,
     intScore,
     player,
+    local_players,
   } = useSelector((state) => state);
 
   let apiUrl = `api.php?amount=${questionsAmount}`;
@@ -38,7 +45,7 @@ function GamePage() {
   if (question_type) {
     apiUrl = apiUrl.concat(`&type=${question_type}`);
   }
-  console.log(allPlayerRecords, `43 gp`);
+
   const { response, error, loading } = useAxios({ url: apiUrl });
 
   if (loading) {
@@ -92,6 +99,11 @@ function GamePage() {
   };
 
   const handleAnswerSelect = (e) => {
+    if (playerIndex < local_players.length - 1) {
+      setPlayerIndex(playerIndex + 1);
+    } else if (playerIndex === local_players.length - 1) {
+      setPlayerIndex(0);
+    }
     if (
       e.target.textContent === response.results[questionIndex].correct_answer &&
       questionIndex < response.results.length - 1
@@ -102,6 +114,7 @@ function GamePage() {
       dispatch(handleScoreChange(intScore + 1));
       // console.log(intScore);
       setQuestionIndex(questionIndex + 1);
+      dispatch(local_players[playerIndex].score + 1);
       // console.log(questionIndex, response.results.length);
     } else if (questionIndex >= response.results.length - 1) {
       saveData();
@@ -138,9 +151,10 @@ function GamePage() {
             </div>
 
             <div>
-              <h1>{response.results[questionIndex].question}</h1>
+              <h1>{decode(response.results[questionIndex].question)}</h1>
               <h3>
-                <span id="playerNum">{username}</span>'s turn
+                <span id="playerNum">{local_players[playerIndex].name}</span>'s
+                turn
               </h3>
             </div>
 
@@ -153,6 +167,15 @@ function GamePage() {
             </div>
 
             <div>
+              {local_players.map((player, index) => {
+                return (
+                  <div key={index}>
+                    <h3>
+                      {player.name}'s score: {player.score}
+                    </h3>
+                  </div>
+                );
+              })}
               <h3>
                 {' '}
                 Score: {intScore} / {response.results.length}

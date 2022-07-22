@@ -4,7 +4,8 @@ import { useSelector} from "react-redux";
 export default function LeaderBoardList() {
 
     const {
-        player
+        player,
+        online_Player
       } = useSelector((state) => state);
 
 
@@ -25,8 +26,8 @@ export default function LeaderBoardList() {
                             let counter = 0;
                             return (
                                 <tr key={index}>
-                                    <td>{counter += 1}</td>
-                                    <td >{player.name}</td>
+                                    <td>{index += 1}</td>
+                                    <td >{player.name ? player.name : online_Player}</td>
                                     <td>{player.score}</td>
                                 </tr>
                             )

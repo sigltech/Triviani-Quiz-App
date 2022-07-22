@@ -9,3 +9,5 @@ export { default as IndexPage } from './IndexPage/index.jsx';
 export { default as HowToPlay } from './HowToPlay/index.jsx';
 export { default as SocketExperiment } from './SocketExperiment/index.jsx';
 export { default as OnlineGame } from './OnlineGame/index.jsx';
+export { default as WaitingRoomPage } from './WaitingRoomPage/index.jsx';
+export {default as ComingSoonPage} from './ComingSoonPage/index.jsx';
