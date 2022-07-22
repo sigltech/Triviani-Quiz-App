@@ -12,20 +12,20 @@ const IndexPage = () => {
     navigate('/game');
   };
 
-  useEffect(() => {
-    async function getData() {
-      let serverApi = 'http://localhost:1234';
-      await axios.get(serverApi).then((res) => console.log(res.data));
-    }
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   async function getData() {
+  //     let serverApi = 'http://localhost:1234';
+  //     await axios.get(serverApi).then((res) => console.log(res.data));
+  //   }
+  //   getData();
+  // }, []);
 
   return (
     <>
       <div className="index-container">
         <div className="homepage-container">
           <h1>Welcome to the Trivia Game</h1>
-          <div></div> 
+          <div></div>
           <button onClick={() => navigate('/localgame')}>Local Game</button>
           <button onClick={() => navigate('/onlinegame')}>Online Game</button>
           {/* <button onClick={() => navigate('/socket')}>message friend</button> */}

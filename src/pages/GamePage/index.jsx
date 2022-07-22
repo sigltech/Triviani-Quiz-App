@@ -53,13 +53,14 @@ function GamePage() {
   }
 
   console.log(
-    question_category,
-    question_difficulty,
-    question_type,
-    questionsAmount,
-    players,
-    player,
-    username
+    // question_category,
+    // question_difficulty,
+    // question_type,
+    // questionsAmount,
+    // players,
+    // player,
+    // username
+    local_players
   );
   console.log(questionIndex, response.results.length);
   console.log(response.results[questionIndex].question);
@@ -111,10 +112,10 @@ function GamePage() {
       console.log(
         `Correct answer is ${response.results[questionIndex].correct_answer}`
       );
+      dispatch(local_players[playerIndex].score + 1);
       dispatch(handleScoreChange(intScore + 1));
       // console.log(intScore);
       setQuestionIndex(questionIndex + 1);
-      dispatch(local_players[playerIndex].score + 1);
       // console.log(questionIndex, response.results.length);
     } else if (questionIndex >= response.results.length - 1) {
       saveData();
