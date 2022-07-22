@@ -1,3 +1,4 @@
+
 import React, { useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { SelectInputs } from "../../components";
@@ -11,6 +12,7 @@ const LocalGame = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [numPlayers, setNumPlayers] = useState();
+
   const [user, setUser] = useState([{name: "", score: 0}]);
   const [inputValue, setInputValue] = useState([{name: "", score: 0}]);
   const [submitValue, setSubmitValue] = useState([{name: "", score: 0}]);
@@ -28,14 +30,14 @@ const LocalGame = () => {
   }
 
   const difficultyOpt = [
-    { id: "easy", name: "Easy" },
-    { id: "medium", name: "Medium" },
-    { id: "hard", name: "Hard" },
+    { id: 'easy', name: 'Easy' },
+    { id: 'medium', name: 'Medium' },
+    { id: 'hard', name: 'Hard' },
   ];
 
   const typeOpt = [
-    { id: "multiple", name: "Multiple Choice" },
-    { id: "boolean", name: "True/False" },
+    { id: 'multiple', name: 'Multiple Choice' },
+    { id: 'boolean', name: 'True/False' },
   ];
 
   const numberOpt = [
@@ -112,6 +114,7 @@ const LocalGame = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitValue(inputValue.name);
+
     console.log(playerData)
     // dispatch(handlePlayerChange([...player, inputValue]));
     // console.log(`Player information: ${JSON.stringify(player)}`)

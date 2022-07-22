@@ -68,7 +68,7 @@ const Reducer = (state = initState, action) => {
     case CHANGE_PLAYER:
       return {
         ...state,
-        player: action.payload,
+        allPlayerRecords: [...state.allPlayerRecords, action.newItem]
       }
     case CHANGE_ONLINE_PLAYER:
       return {
