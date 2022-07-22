@@ -7,15 +7,8 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
 import { Provider } from 'react-redux';
 import store from '../../store';
-import BreweryCard from '.';
 import HowToPlay from '.';
 import { BrowserRouter as Router } from 'react-router-dom';
-
-// const testData = {
-//     name: 'fake brewery',
-//     city: 'Colombus',
-//     state: 'ohio'
-// }
 
 describe('How to play page', () => {
   beforeEach(() => {

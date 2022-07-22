@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { decode } from 'html-entities';
 
 const getRandomInt = (max) => {
   return Math.floor(Math.random() * Math.floor(max));
@@ -39,8 +40,9 @@ const RenderQuestions = ({ response, questionIndex, handleAnswerSelect }) => {
               className="answerCard"
               value={value}
               key={index}
-              dangerouslySetInnerHTML={{ __html: answer }}
-            ></div>
+            >
+              {decode(answer)}
+            </div>
           );
         })}
 
