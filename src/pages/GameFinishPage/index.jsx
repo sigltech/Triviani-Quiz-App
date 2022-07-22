@@ -22,7 +22,7 @@ function GameFinishPage() {
 
       useEffect(() => {
       function pushToBackend(player) {
-        const url = 'http://localhost:1234/data';
+        const url = 'https://triviani-data-server-js.herokuapp.com/data';
         const data = player;
         const options = {
           method: 'POST',
@@ -37,11 +37,17 @@ function GameFinishPage() {
         pushToBackend(player)
       },[]);
 
+      const handleWinner = () => {
+        const winner = players.find(player => player.score === intScore);
+        console.log(winner);
+        return winner.username;
+      }
+
     return(
         <div className="gameFinish">
 
             <div className="winner">
-                <h1> The winner is ...</h1>
+                <h1> The winner is {handleWinner}</h1>
             </div>
             
             <div className="gameover"> 

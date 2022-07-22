@@ -44,3 +44,9 @@
     padding: 1rem;
     margin: 1rem;
 }
+
+.answerCard:hover {
+    cursor: pointer;
+    background-color: green;
+    
+}
