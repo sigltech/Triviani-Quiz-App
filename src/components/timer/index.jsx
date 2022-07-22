@@ -37,7 +37,7 @@ export default function Timer() {
           {renderTime}
         </CountdownCircleTimer>
       </div>
-      <p className="info">
+      <p className="info" role="p">
         Change component properties in the code filed on the right to try
         difference functionalities
       </p>

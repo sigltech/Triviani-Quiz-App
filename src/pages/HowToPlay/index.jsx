@@ -12,7 +12,7 @@ const HowToPlay = () => {
 
         <h3>Starting a local game</h3>
 
-        <ol>
+        <ol role="list">
           <li>Enter your username</li>
           <li>Add players max 4</li>
           <li>Select a Quiz Category</li>
