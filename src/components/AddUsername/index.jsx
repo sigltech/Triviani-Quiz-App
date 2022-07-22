@@ -8,7 +8,7 @@ export default function AddUsername({user, setUser, handleInputChange }) {
 
   return (
     <div id="addUsername" className="addUsername">
-        <input onChange={handleInputChange} id='player1' required type="text" placeholder="Player Name"/>
+        <input className="player" onChange={handleInputChange} id='player1' required type="text" placeholder="Player Name"/>
     </div>
   );
 }

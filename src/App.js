@@ -3,6 +3,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 
 import { OnlineGamePage, GameFinishPage, GamePage, IndexPage, LeaderboardPage, LocalGame, SocketExperiment, HowToPlay,OnlineGame, WaitingRoomPage, ComingSoonPage } from './pages';
+import { LoadingPage } from './components';
 
 import Layout from './Layouts';
 // import {decode} from 'html-entities';
