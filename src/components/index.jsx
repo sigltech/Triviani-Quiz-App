@@ -1,9 +1,12 @@
 export { default as LoadingPage } from './LoadingPage';
 export { default as SelectInputs } from './SelectInputs';
 export { default as Timer } from './Timer';
-export {default as DarkModeToggle} from './DarkModeToggle';
-export {default as LeaderBoardChart} from './LeaderBoardChart';
-export {default as LeaderBoardList} from './LeaderBoardList';
-export {default as RenderQuestions} from './RenderQuestions';
+export { default as DarkModeToggle } from './DarkModeToggle';
+export { default as LeaderBoardChart } from './LeaderBoardChart';
+export { default as LeaderBoardList } from './LeaderBoardList';
+export { default as RenderQuestions } from './RenderQuestions';
+export { default as RenderOnlineQuestions } from './RenderOnlineQuestions';
 export { default as AddUsername } from './AddUsername';
 export { default as WaitingRoom } from './WaitingRoom';
+export { default as GoogleTranslate } from './GoogleTranslate';
+export { default as OnlineGameComp } from './OnlineGameComp';

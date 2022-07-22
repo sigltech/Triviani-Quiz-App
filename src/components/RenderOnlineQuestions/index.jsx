@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { io } from 'socket.io-client';
+const socket = io.connect('http://localhost:8000');
 
 const getRandomInt = (max) => {
   return Math.floor(Math.random() * Math.floor(max));
 };
 
-const RenderQuestions = ({ response, questionIndex, handleAnswerSelect }) => {
+const RenderOnlineQuestions = ({ response, questionIndex, handleAnswerSelect }) => {
   const [options, setOptions] = useState([]);
   const corr_answer = response.results[questionIndex].correct_answer;
 
@@ -24,6 +26,16 @@ const RenderQuestions = ({ response, questionIndex, handleAnswerSelect }) => {
     }
   }, [response, questionIndex]);
   console.log(corr_answer);
+  
+  useEffect(() => {
+    
+    socket.emit('questions', options)
+    socket.on('questions', (data) => {
+      console.log(data);
+    }
+    )
+  },[socket])
+  
   return (
     <>
       {options &&
@@ -51,4 +63,4 @@ const RenderQuestions = ({ response, questionIndex, handleAnswerSelect }) => {
   );
 };
 
-export default RenderQuestions;
+export default RenderOnlineQuestions;

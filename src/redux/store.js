@@ -5,18 +5,20 @@ import Reducer from "./reducer";
 import { configureStore } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
- 
+
 
 // 'persist-key'
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist:['username', 'intScore', 'player', 'online_player','online_username', 'online_room'],
+
+  whitelist:['username', 'intScore', 'player', 'online_player','online_username', 'online_room', 'local_players'],
+
   blacklist: ['question_category',
-  'question_difficulty',
-  'question_type',
-  'questionsAmount',
-  'players']
+    'question_difficulty',
+    'question_type',
+    'questionsAmount',
+    'players']
 }
 
 const persistedReducer = persistReducer(persistConfig, Reducer)

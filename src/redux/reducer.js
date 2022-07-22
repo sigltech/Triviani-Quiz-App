@@ -8,12 +8,13 @@ import {
   CHANGE_ONLINE_USERNAME,
   CHANGE_PLAYERS,
   CHANGE_PLAYER,
+  CHANGE_LOCAL_PLAYERS,
   CHANGE_ONLINE_PLAYER,
   CHANGE_ONLINE_ROOM
 } from "./actionTypes";
 
 const initState = {
-  username: "",
+  username: [],
   online_username: "",
   question_category: "",
   question_difficulty: "",
@@ -24,6 +25,7 @@ const initState = {
   player: [],
   online_player: [],
   online_room: "",
+  local_players: [],
 };
 const Reducer = (state = initState, action) => {
 
@@ -66,12 +68,17 @@ const Reducer = (state = initState, action) => {
     case CHANGE_PLAYER:
       return {
         ...state,
-        player: action.payload,
+        allPlayerRecords: [...state.allPlayerRecords, action.newItem]
       }
     case CHANGE_ONLINE_PLAYER:
       return {
         ...state,
         online_player: action.payload,
+      }
+    case CHANGE_LOCAL_PLAYERS:
+      return {
+        ...state,
+        local_players: action.payload,
       }
     case CHANGE_ONLINE_USERNAME:
       return {

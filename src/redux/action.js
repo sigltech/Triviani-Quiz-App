@@ -13,7 +13,8 @@ import {
   CHANGE_PLAYER,
   CHANGE_ONLINE_PLAYER,
   CHANGE_ONLINE_USERNAME,
-  CHANGE_ONLINE_ROOM
+  CHANGE_ONLINE_ROOM, 
+  CHANGE_LOCAL_PLAYERS,
 } from "./actionTypes";
 
 export const handleCategoryChange = (payload) => ({
@@ -71,6 +72,11 @@ export const handleOnlineRoomChange = (payload) => ({
   payload,
 });
 
+export const handleLocalPlayersChange = (payload) => ({
+  type: CHANGE_LOCAL_PLAYERS,
+  payload,
+});
+  
 // export const fetchData = () => {
 //     const [answers, setAnswers] = useState('');
 

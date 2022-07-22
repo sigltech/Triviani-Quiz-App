@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useAxios from '../../hooks/useAxios';
 import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
-import{ useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import Countdown from 'react-countdown';
 import { LoadingPage, RenderQuestions } from '../../components/index.jsx';
-import { handlePlayerChange, handleScoreChange } from '../../redux/action';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { handleLocalPlayersChange, handlePlayerChange, handleScoreChange } from '../../redux/action';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { store } from '../../redux/store';
-
-
 
 function GamePage() {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [timer, setTimer] = useState(11000);
+  const [playerIndex, setPlayerIndex] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const {
     username,
     question_category,
@@ -26,11 +25,11 @@ function GamePage() {
     players,
     intScore,
     player,
+    local_players
   } = useSelector((state) => state);
 
-
   let apiUrl = `api.php?amount=${questionsAmount}`;
-  
+
   console.log(questionsAmount);
   if (question_category) {
     apiUrl = apiUrl.concat(`&category=${question_category}`);
@@ -41,9 +40,9 @@ function GamePage() {
   if (question_type) {
     apiUrl = apiUrl.concat(`&type=${question_type}`);
   }
-  console.log(apiUrl);
+  console.log(allPlayerRecords, `43 gp`);
   const { response, error, loading } = useAxios({ url: apiUrl });
-  
+
   if (loading) {
     return <LoadingPage />;
   }
@@ -55,10 +54,10 @@ function GamePage() {
     questionsAmount,
     players,
     player,
-    username,
+    username
   );
-  console.log(questionIndex, response.results.length)
-  console.log(response.results[questionIndex].question)
+  console.log(questionIndex, response.results.length);
+  console.log(response.results[questionIndex].question);
 
   const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
@@ -76,76 +75,102 @@ function GamePage() {
     }
   };
 
-  
- const saveData = async () => {
+  const saveData = async () => {
     try {
-      await AsyncStorage.setItem('@save_score', intScore)
-      alert('Data successfully saved')
+      await AsyncStorage.setItem('@save_score', intScore);
+      alert('Data successfully saved');
     } catch (e) {
-      alert('Failed to save the data to the storage')
+      alert('Failed to save the data to the storage');
     }
-  }
+  };
 
   const getData = async () => {
     try {
-      const storedDate = await AsyncStorage.getItem('@save_score')
-      console.log(storedDate)
-    }  catch (e) {
-      alert('Failed to get the data from the storage')
+      const storedDate = await AsyncStorage.getItem('@save_score');
+      console.log(storedDate);
+    } catch (e) {
+      alert('Failed to get the data from the storage');
     }
-  }
+  };
 
-
-  
   const handleAnswerSelect = (e) => {
-    if (e.target.textContent === response.results[questionIndex].correct_answer && questionIndex < response.results.length -1) {
-
-      console.log(`Correct answer is ${response.results[questionIndex].correct_answer}`);
+    if(playerIndex < local_players.length - 1) {
+      setPlayerIndex(playerIndex + 1);
+    } else if(playerIndex === local_players.length - 1) {
+      setPlayerIndex(0);
+    }
+    if (
+      e.target.textContent === response.results[questionIndex].correct_answer &&
+      questionIndex < response.results.length - 1
+    ) {
+      console.log(
+        `Correct answer is ${response.results[questionIndex].correct_answer}`
+      );
       dispatch(handleScoreChange(intScore + 1));
       // console.log(intScore);
       setQuestionIndex(questionIndex + 1);
+      dispatch(local_players[playerIndex].score + 1);
       // console.log(questionIndex, response.results.length);
-    } else if (questionIndex >= response.results.length -1 ){
-        saveData();
-        dispatch(handlePlayerChange([...player, {name: username, score: intScore}]));
-        console.log(player);
-        dispatch(handleScoreChange(0));
-        navigate('/finish')
-    } else if (questionIndex < response.results.length -1) {
+    } else if (questionIndex >= response.results.length - 1) {
+      saveData();
+      dispatch(
+        handlePlayerChange([...player, { name: username, score: intScore }])
+      );
+      console.log(player);
+      dispatch(handleScoreChange(0));
+      navigate('/finish');
+    } else if (questionIndex < response.results.length - 1) {
       setQuestionIndex(questionIndex + 1);
     }
-  }; 
+  };  
+  
 
   return (
     <>
       <div className="gamePage">
         <div className="game-container">
           <div className="gamepage-container">
-
             <div className="countDown">
-
               <Countdown
                 intervalDelay={1000}
                 precision={3}
-                date={Date.now() + timer} 
+                date={Date.now() + timer}
                 renderer={renderer}
                 key={questionIndex}
                 autoStart={true}
-                onComplete={() => {questionIndex === response.results.length -2 ? navigate('/finish') : setQuestionIndex(questionIndex + 1)}}
+                onComplete={() => {
+                  questionIndex === response.results.length - 2
+                    ? navigate('/finish')
+                    : setQuestionIndex(questionIndex + 1);
+                }}
               />
-
             </div>
 
             <div>
               <h1>{response.results[questionIndex].question}</h1>
-              <h3><span id='playerNum'>{username}</span>'s turn</h3>
+              <h3>
+                <span id="playerNum">{local_players[playerIndex].name}</span>'s turn
+              </h3>
             </div>
 
             <div className="answers">
-              <RenderQuestions  response={response} questionIndex={questionIndex} handleAnswerSelect={handleAnswerSelect}/>
+              <RenderQuestions
+                response={response}
+                questionIndex={questionIndex}
+                handleAnswerSelect={handleAnswerSelect}
+              />
             </div>
 
             <div>
+              {local_players.map((player, index) => {
+                return (
+                  <div key={index}>
+                    <h3>
+                      {player.name}'s score: {player.score}
+                    </h3>
+                  </div>
+                );
+              })}
               <h3>
                 {' '}
                 Score: {intScore} / {response.results.length}
@@ -162,7 +187,7 @@ function GamePage() {
 
             <button onClick={getData}>get data test</button>
           </div>
-          </div>
+        </div>
       </div>
     </>
   );

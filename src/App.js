@@ -1,7 +1,10 @@
 import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import { OnlineGamePage, GameFinishPage, GamePage, IndexPage, LeaderboardPage, LocalGame, SocketExperiment, OnlineGame } from './pages';
+
+import { OnlineGamePage, GameFinishPage, GamePage, IndexPage, LeaderboardPage, LocalGame, SocketExperiment, HowToPlay,OnlineGame, WaitingRoomPage, ComingSoonPage } from './pages';
+import { LoadingPage } from './components';
+
 import Layout from './Layouts';
 // import {decode} from 'html-entities';
 
@@ -14,23 +17,22 @@ import Layout from './Layouts';
 // decode('&copy;', {level: 'xml'});
 // // -> '&copy;'
 
-
-
 function App() {
 
   return (
     <div className="App">
 
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Layout />}> 
           <Route path="/" element={<IndexPage />} />
           <Route path="onlinegame" >
-            <Route path="/onlinegame" element={<OnlineGamePage />} />
-            <Route path=":gameroom" element={<OnlineGame />} />
+            <Route path="/onlinegame" element={<ComingSoonPage />} />
+            {/* <Route path="/onlinegame/waitingroom" element={< WaitingRoomPage/>} /> */}
           </Route>
           <Route path="/finish" element={<GameFinishPage />} />
           <Route path="/localgame" element={<LocalGame />} />
           <Route path="/game" element={<GamePage />} />
+          <Route path="/how_to_play" element={<HowToPlay />} />
           <Route path="/socket" element={<SocketExperiment />} />
           <Route path="/localgame" element={<LocalGame />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
