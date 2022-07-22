@@ -5,9 +5,14 @@ import './style.css';
 import { useNavigate } from 'react-router';
 import Countdown from 'react-countdown';
 import { LoadingPage, RenderQuestions } from '../../components/index.jsx';
-import { handleLocalPlayersChange, handlePlayerChange, handleScoreChange } from '../../redux/action';
+import {
+  handleLocalPlayersChange,
+  handlePlayerChange,
+  handleScoreChange,
+} from '../../redux/action';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { store } from '../../redux/store';
+import { decode } from 'html-entities';
 
 function GamePage() {
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -25,7 +30,7 @@ function GamePage() {
     players,
     intScore,
     player,
-    local_players
+    local_players,
   } = useSelector((state) => state);
 
   let apiUrl = `api.php?amount=${questionsAmount}`;
@@ -40,7 +45,7 @@ function GamePage() {
   if (question_type) {
     apiUrl = apiUrl.concat(`&type=${question_type}`);
   }
-  console.log(allPlayerRecords, `43 gp`);
+
   const { response, error, loading } = useAxios({ url: apiUrl });
 
   if (loading) {
@@ -94,9 +99,9 @@ function GamePage() {
   };
 
   const handleAnswerSelect = (e) => {
-    if(playerIndex < local_players.length - 1) {
+    if (playerIndex < local_players.length - 1) {
       setPlayerIndex(playerIndex + 1);
-    } else if(playerIndex === local_players.length - 1) {
+    } else if (playerIndex === local_players.length - 1) {
       setPlayerIndex(0);
     }
     if (
@@ -122,8 +127,7 @@ function GamePage() {
     } else if (questionIndex < response.results.length - 1) {
       setQuestionIndex(questionIndex + 1);
     }
-  };  
-  
+  };
 
   return (
     <>
@@ -147,9 +151,10 @@ function GamePage() {
             </div>
 
             <div>
-              <h1>{response.results[questionIndex].question}</h1>
+              <h1>{decode(response.results[questionIndex].question)}</h1>
               <h3>
-                <span id="playerNum">{local_players[playerIndex].name}</span>'s turn
+                <span id="playerNum">{local_players[playerIndex].name}</span>'s
+                turn
               </h3>
             </div>
 
