@@ -57,11 +57,10 @@
          expect(window.location.href).toContain("/onlinegame")
      })
  
-     test("Button brings user to socket page", async () => {
-         expect(window.location.href).not.toContain('/socket')
+     test("Button brings user to how to play page", async () => {
          const button = screen.getAllByRole("button")[2];
          await fireEvent.click(button);
-         expect(window.location.href).toContain("/socket")
+         expect(window.location.href).toContain("http://localhost/how_to_play")
      })
  
      test("Displays the appropriate number of users for returned data", async () => {

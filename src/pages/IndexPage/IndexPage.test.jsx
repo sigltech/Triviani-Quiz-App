@@ -47,9 +47,8 @@ describe('indexPage', () => {
   });
 
   test('Button brings user to socket page', async () => {
-    expect(window.location.href).not.toContain('/socket');
     const button = screen.getAllByRole('button')[2];
     await fireEvent.click(button);
-    expect(window.location.href).toContain('/socket');
+    expect(window.location.href).toContain('http://localhost/how_to_play');
   });
 });
