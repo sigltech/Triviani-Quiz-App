@@ -2,11 +2,11 @@ import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 
-import { OnlineGamePage, GameFinishPage, GamePage, IndexPage, LeaderboardPage, LocalGame, SocketExperiment, HowToPlay,OnlineGame, WaitingRoomPage, ComingSoonPage } from './pages';
+import { OnlineGamePage, GameFinishPage, GamePage, IndexPage, LeaderboardPage, LocalGame, SocketExperiment, HowToPlay, OnlineGame, WaitingRoomPage, ComingSoonPage } from './pages';
 import { LoadingPage } from './components';
 
 import Layout from './Layouts';
-// import {decode} from 'html-entities';
+
 
 // decode('&lt; &gt; &quot; &apos; &amp; &#169; &#8710;');
 // // -> '< > " \' & © ∆'
@@ -23,7 +23,7 @@ function App() {
     <div className="App">
 
       <Routes>
-        <Route path="/" element={<Layout />}> 
+        <Route path="/" element={<Layout />}>
           <Route path="/" element={<IndexPage />} />
           <Route path="onlinegame" >
             <Route path="/onlinegame" element={<ComingSoonPage />} />
@@ -33,7 +33,7 @@ function App() {
           <Route path="/localgame" element={<LocalGame />} />
           <Route path="/game" element={<GamePage />} />
           <Route path="/how_to_play" element={<HowToPlay />} />
-          <Route path="/socket" element={<SocketExperiment />} />
+          {/* <Route path="/socket" element={<SocketExperiment />} /> */}
           <Route path="/localgame" element={<LocalGame />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
         </Route>
